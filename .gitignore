@@ -1,0 +1,5 @@
+.DS_Store
+darwin/dmg/*
+darwin/nanobox.dmg
+darwin/nanobox/*
+

@@ -1,26 +1,34 @@
+#!/bin/bash -x
+
+# cleanup from a previous build
+[ -f nanobox.dmg ] && rm -f nanobox.dmg
+[ -f dmg/nanobox.pkg ] && rm -f dmg/nanobox.pkg
+[ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
+
+# prep dirs
+mkdir -p \
+  dmg/.support \
+  nanobox/bin
 
 # prep assets
 # combine all 3 licences into the one tos/license.html
-curl -Lko resources/background.png http://troyr.com/wp-content/uploads/2011/03/pink-pagoda-logo-stacked.png
+[ -f resources/background.png ] || curl -fLkso resources/background.png http://troyr.com/wp-content/uploads/2011/03/pink-pagoda-logo-stacked.png
 # replace with nanobox background
-curl -Lko dmg/.support/background.png http://c8.alamy.com/comp/ADW0EH/new-mega-box-shopping-mall-in-hong-kong-2007-ADW0EH.jpg
-
+[ -f dmg/.support/background.png ] || curl -fLkso dmg/.support/background.png http://c8.alamy.com/comp/ADW0EH/new-mega-box-shopping-mall-in-hong-kong-2007-ADW0EH.jpg
 
 # get mac bins
 # nanobox
-curl -fLko nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
+curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
 chmod 755 nanobox/bin/nanobox
-
 # virtualbox
-curl -fLko dmg/.virtualbox.dmg 'http://download.virtualbox.org/virtualbox/5.0.0/VirtualBox-5.0.0-101573-OSX.dmg'
-
+[ -f dmg/.virtualbox.dmg ] || curl -fLkso dmg/.virtualbox.dmg 'http://download.virtualbox.org/virtualbox/5.0.0/VirtualBox-5.0.0-101573-OSX.dmg'
 # vagrant
-curl -fLko dmg/.vagrant.dmg 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.dmg'
-
+[ -f dmg/.vagrant.dmg ] || curl -fLkso dmg/.vagrant.dmg 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.dmg'
 # boot2docker box
-curl -fLko dmg/.nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v0.0.7/nanobox-boot2docker.box
+[ -f dmg/.nanobox-boot2docker.box ] || curl -fLkso dmg/.nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v0.0.7/nanobox-boot2docker.box
 
 
+set -e
 #########################################################
 #   PKG
 #########################################################
@@ -28,7 +36,7 @@ curl -fLko dmg/.nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boo
 pkgbuild \
   --root nanobox \
   --identifier com.nanobox.nanobox \
-  --version "0.0.6" \
+  --version "0.0.7" \
   --install-location "/opt/nanobox" \
   --scripts "scripts" \
   --timestamp=none \
