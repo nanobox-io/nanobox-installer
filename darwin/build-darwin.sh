@@ -10,12 +10,6 @@ mkdir -p \
   dmg/.support \
   nanobox/bin
 
-# prep assets
-# combine all 3 licences into the one tos/license.html
-[ -f resources/background.png ] || curl -fLkso resources/background.png http://troyr.com/wp-content/uploads/2011/03/pink-pagoda-logo-stacked.png
-# replace with nanobox background
-[ -f dmg/.support/background.png ] || curl -fLkso dmg/.support/background.png http://c8.alamy.com/comp/ADW0EH/new-mega-box-shopping-mall-in-hong-kong-2007-ADW0EH.jpg
-
 # get mac bins
 # nanobox
 curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
@@ -56,7 +50,7 @@ rm -f core.pkg
 #   DMG
 #########################################################
 # create temporary DMG
-TMP_SIZE='256m'
+TMP_SIZE='512m'
 hdiutil create \
   -srcfolder "dmg" \
   -volname "nanobox" \
