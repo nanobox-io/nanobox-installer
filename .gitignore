@@ -1,5 +1,5 @@
 .DS_Store
-darwin/dmg/*
+darwin/dmg/.v*
 darwin/nanobox.dmg
 darwin/nanobox/*
 

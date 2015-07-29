@@ -71,24 +71,24 @@ DEVICE=$(hdiutil attach -readwrite -noverify -noautoopen "./temp.dmg" | egrep '^
 
 # make finder deal look nice
 echo '
-   tell application "Finder"
-     tell disk "'nanobox'"
-           open
-           set current view of container window to icon view
-           set toolbar visible of container window to false
-           set statusbar visible of container window to false
-           set the bounds of container window to {100, 100, 705, 640}
-           set theViewOptions to the icon view options of container window
-           set arrangement of theViewOptions to not arranged
-           set icon size of theViewOptions to 72
-           delay 2
-           set background picture of theViewOptions to file ".support:'background.png'"
-           delay 5
-           set position of item "'nanobox.pkg'" of container window to {60, 400}
-           update without registering applications
-           delay 5
-     end tell
-   end tell
+  tell application "Finder"
+    tell disk "'nanobox'"
+      open
+      set current view of container window to icon view
+      set toolbar visible of container window to false
+      set statusbar visible of container window to false
+      set the bounds of container window to {100, 100, 710, 515}
+      set theViewOptions to the icon view options of container window
+      set arrangement of theViewOptions to not arranged
+      set icon size of theViewOptions to 72
+      delay 2
+      set background picture of theViewOptions to file ".support:'background.png'"
+      delay 5
+      set position of item "'nanobox.pkg'" of container window to {465, 145}
+      update without registering applications
+      delay 5
+    end tell
+  end tell
 ' | osascript
 
 # set the permissions and generate the final DMG
