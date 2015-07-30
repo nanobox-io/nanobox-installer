@@ -64,6 +64,8 @@ hdiutil create \
 # attach and read the temporary DMG device
 DEVICE=$(hdiutil attach -readwrite -noverify -noautoopen "./temp.dmg" | egrep '^/dev/' | sed 1q | awk '{print $1}')
 
+sleep 2
+
 # make finder deal look nice
 echo '
   tell application "Finder"
@@ -72,7 +74,7 @@ echo '
       set current view of container window to icon view
       set toolbar visible of container window to false
       set statusbar visible of container window to false
-      set the bounds of container window to {100, 100, 710, 515}
+      set the bounds of container window to {100, 100, 710, 525}
       set theViewOptions to the icon view options of container window
       set arrangement of theViewOptions to not arranged
       set icon size of theViewOptions to 72
@@ -80,6 +82,7 @@ echo '
       set background picture of theViewOptions to file ".support:'background.png'"
       delay 5
       set position of item "'nanobox.pkg'" of container window to {465, 145}
+      set position of item "'uninstall.tool'" of container window to {465, 345}
       update without registering applications
       delay 5
     end tell

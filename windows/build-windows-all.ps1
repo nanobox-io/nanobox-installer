@@ -82,7 +82,7 @@ $contents = @"
 "@
 $contents | Out-File `
   -Encoding ASCII `
-  -FilePath "$($NanoboxTmpDir)\nanobox-bundle.wxi"
+  -FilePath "$($NanoboxTmpDir)\nanobox-bundle.wxs"
 
 #--------------------------------------------------------------------
 # Create installer
@@ -92,7 +92,8 @@ Write-Host "Running candle.exe"
 $CandleArgs = @(
   "-nologo",
   "-ext WixBalExtension",
-  "$($NanoboxTmpDir)\nanobox-bundle.wxi"
+  "-out $NanoboxTmpDir\ ",
+  "$($NanoboxTmpDir)\nanobox-bundle.wxs"
 )
 Start-Process -NoNewWindow -Wait `
   -ArgumentList $CandleArgs -FilePath $WixCandle

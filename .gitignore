@@ -1,5 +1,6 @@
 .DS_Store
+darwin/dmg/.nanobox-boot2docker.box
+darwin/dmg/nanobox.pkg
 darwin/dmg/.v*
 darwin/nanobox.dmg
 darwin/nanobox/*
-
