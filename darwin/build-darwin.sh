@@ -21,12 +21,11 @@ chmod 755 nanobox/bin/nanobox
 # boot2docker box
 [ -f dmg/.nanobox-boot2docker.box ] || curl -fLkso dmg/.nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v0.0.7/nanobox-boot2docker.box
 
-
-set -e
 #########################################################
 #   PKG
 #########################################################
 # build core.pkg
+echo "Building core.pkg"
 pkgbuild \
   --root nanobox \
   --identifier com.nanobox.nanobox \
@@ -36,6 +35,8 @@ pkgbuild \
   --timestamp=none \
   core.pkg
 
+
+echo "Building nanobox.pkg"
 # build nanobox.pkg
 productbuild \
   --distribution nanobox.dist \
@@ -50,7 +51,7 @@ rm -f core.pkg
 #   DMG
 #########################################################
 # create temporary DMG
-TMP_SIZE='512m'
+TMP_SIZE='1024m'
 hdiutil create \
   -srcfolder "dmg" \
   -volname "nanobox" \
@@ -86,7 +87,7 @@ echo '
 ' | osascript
 
 # set the permissions and generate the final DMG
-chmod -Rf go-w /Volumes/nanobox
+sudo chmod -Rf go-w /Volumes/nanobox
 sync
 hdiutil detach ${DEVICE}
 
