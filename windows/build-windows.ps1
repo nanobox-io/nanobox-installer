@@ -1,12 +1,13 @@
 # Exit if there are any exceptions
 $ErrorActionPreference = "Stop"
 
-$NanoboxVersion = "0.0.7"
+$Boot2DockerVersion = "0.0.7"
 # Final path to output
 $OutputPath = "nanobox_$($NanoboxVersion).msi"
 
 # Needs to change each release
 $UpgradeCode = "f44a14ed-849a-4acd-a537-51395f7d5958"
+$NanoboxVersion = "0.0.7"
 
 # Get the directory to this script
 $Dir = Split-Path $script:MyInvocation.MyCommand.Path
@@ -35,7 +36,7 @@ $client.DownloadFile($nanoboxSourceURL, $nanoboxDest)
 Write-Host "Downloaded nanobox: $($NanoboxVersion)"
 
 # Download nanobox-boot2docker
-$nanoboxDockerSourceURL = "https://github.com/pagodabox/nanobox-boot2docker/releases/download/v$($NanoboxVersion)/nanobox-boot2docker.box"
+$nanoboxDockerSourceURL = "https://github.com/pagodabox/nanobox-boot2docker/releases/download/v$($Boot2DockerVersion)/nanobox-boot2docker.box"
 $nanoboxDockerDest      = "$($NanoboxTmpDir)/nanobox-boot2docker.box"
 
 Write-Host "Downloading nanobox-boot2docker: $($NanoboxVersion)"
@@ -150,12 +151,23 @@ $contents = @"
     <!-- Add nanobox-boot2docker box after install -->
     <CustomAction Id="AddBox"
                   Directory="NANOBOXAPPDIR"
-                  ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box add --name nanobox/boot2docker &quot;[NANOBOXAPPDIR]\nanobox-boot2docker.box&quot;"
+                  ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box add --name nanobox/boot2docker --force &quot;[NANOBOXAPPDIR]\nanobox-boot2docker.box&quot;"
                   Execute="commit"
                   Return="check"/>
 
     <InstallExecuteSequence>
-      <Custom Action="AddBox" After="InstallFiles"/>
+      <Custom Action="AddBox" After="InstallFiles">Not Installed AND Not UpgradingProductCode</Custom>
+    </InstallExecuteSequence>
+
+    <!-- Remove nanobox-boot2docker box on uninstall -->
+    <CustomAction Id="DelBox"
+                  Directory="NANOBOXAPPDIR"
+                  ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box remove --force nanobox/boot2docker"
+                  Execute="commit"
+                  Return="check"/>
+
+    <InstallExecuteSequence>
+      <Custom Action="DelBox" After="InstallFiles">Remove AND Not UpgradingProductCode</Custom>
     </InstallExecuteSequence>
 
     <!-- Define the features of our install -->
