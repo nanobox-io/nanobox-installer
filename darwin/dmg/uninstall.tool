@@ -71,29 +71,31 @@ done
 
 vagrant box list  | grep '^nanobox/boot2docker ' &> /dev/null
 if [[ $? -eq 0 ]]; then
-    vagrant box remove nanobox/boot2docker --force
+    vagrant box remove nanobox/boot2docker --force &> /dev/null
 fi
 
 echo "Successfully uninstalled nanobox."
 
 # Run the uninstall.tool scripts of vagrant and virtualbox also (if selected)
 if [ "$my_answer" == "bundle" ]; then
+    my_answer=''
     echo "Uninstalling vagrant.."
-    which vagrant
+    which vagrant &> /dev/null
     if [[ $? -eq 0 ]]; then
-        hdiutil mount /Volumes/nanobox/.vagrant.dmg
-        sudo /Volumes/Vagrant/uninstall.tool
-        hdiutil unmount /Volumes/Vagrant
+        hdiutil mount /Volumes/nanobox/.vagrant.dmg &> /dev/null
+        ( exec /Volumes/Vagrant/uninstall.tool )
+        hdiutil unmount /Volumes/Vagrant &> /dev/null
     fi
     
     echo "Uninstalling virtualbox.."
-    which vboxmanage
+    which vboxmanage &> /dev/null
     if [[ $? -eq 0 ]]; then
-        hdiutil mount /Volumes/nanobox/.virtualbox.dmg
-        sudo /Volumes/VirtualBox/VirtualBox_Uninstall.tool
-        hdiutil unmount /Volumes/VirtualBox/
+        hdiutil mount /Volumes/nanobox/.virtualbox.dmg &> /dev/null
+        ( exec /Volumes/VirtualBox/VirtualBox_Uninstall.tool )
+        hdiutil unmount /Volumes/VirtualBox/ &> /dev/null
     fi
 fi
 
+echo ""
 echo "Done."
 key_exit 0
