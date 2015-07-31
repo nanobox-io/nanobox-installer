@@ -3,14 +3,14 @@
 which vboxmanage
 if [[ $? -ne 0 ]]; then
   hdiutil mount /Volumes/nanobox/.virtualbox.dmg 
-  sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /Volumes/Mac\ HD
+  sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /
   hdiutil unmount /Volumes/VirtualBox/
 fi
 
 which vagrant
 if [[ $? -ne 0 ]]; then
   hdiutil mount /Volumes/nanobox/.vagrant.dmg
-  sudo installer -pkg /Volumes/Vagrant/Vagrant.pkg -target /Volumes/Mac\ HD
+  sudo installer -pkg /Volumes/Vagrant/Vagrant.pkg -target /
   hdiutil unmount /Volumes/Vagrant
 fi
 
