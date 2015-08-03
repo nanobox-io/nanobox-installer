@@ -4,3 +4,5 @@ darwin/dmg/nanobox.pkg
 darwin/dmg/.v*
 darwin/nanobox.dmg
 darwin/nanobox/*
+linux/nanobox/opt/
+linux/*.deb
