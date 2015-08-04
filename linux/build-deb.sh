@@ -10,7 +10,7 @@ if ! [ -x nanobox/opt/nanobox/bin/nanobox ]; then
 fi
 
 if ! [ -a nanobox/opt/nanobox/share/nanobox-boot2docker.box ]; then
-  wget -O nanobox/opt/nanobox/share/nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v$(BOOT2DOCKER_VERS)/nanobox-boot2docker.box
+  wget -O nanobox/opt/nanobox/share/nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v${BOOT2DOCKER_VERS}/nanobox-boot2docker.box
 fi
 
 # gzip manpage
@@ -18,4 +18,4 @@ gzip --best nanobox/usr/share/man/man1/nanobox.1
 # build package
 dpkg-deb --build nanobox
 # rename package
-mv nanobox.deb nanobox-$(NANOBOX_VERS).deb
+mv nanobox.deb nanobox-${NANOBOX_VERS}.deb

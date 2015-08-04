@@ -1,0 +1,9 @@
+Package: nanobox-bundle
+Version: 0.0.7
+Section: base
+Priority: optional
+Architecture: all
+Depends: bash
+Maintainer: Greg Linton <lintong@pagodabox.com>
+Description: Nanobox bundle
+ This meta package provides nanobox cli utility, VirtualBox, and Vagrant

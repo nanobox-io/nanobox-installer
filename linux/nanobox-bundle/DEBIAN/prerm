@@ -1,0 +1,6 @@
+#!/bin/sh -e
+if [ "$1" = "remove" ]; then
+  dpkg -r nanobox
+  dpkg -r vagrant
+  dpkg -r virtualbox
+fi
