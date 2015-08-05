@@ -1,8 +1,8 @@
 #!/bin/sh -e
 if [ "$1" = "configure" ]; then
+  # remove lock in order to preserve package individual-ness
   rm /var/lib/dpkg/lock
-  which vboxmanage || dpkg -i /opt/nanobox/share/virtualbox.deb
-  which vagrant    || dpkg -i /opt/nanobox/share/vagrant.deb
-  which nanobox    || dpkg -i /opt/nanobox/share/nanobox.deb
-  touch /var/lib/dpkg/lock
+  dpkg -l virtualbox-5.0 > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/virtualbox.deb
+  dpkg -l vagrant        > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/vagrant.deb
+  dpkg -l nanobox        > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/nanobox.deb
 fi
