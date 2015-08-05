@@ -14,10 +14,6 @@ mkdir -p \
 # nanobox
 curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
 chmod 755 nanobox/bin/nanobox
-# virtualbox
-[ -f dmg/.virtualbox.dmg ] || curl -fLkso dmg/.virtualbox.dmg 'http://download.virtualbox.org/virtualbox/5.0.0/VirtualBox-5.0.0-101573-OSX.dmg'
-# vagrant
-[ -f dmg/.vagrant.dmg ] || curl -fLkso dmg/.vagrant.dmg 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.dmg'
 # boot2docker box
 [ -f dmg/.nanobox-boot2docker.box ] || curl -fLkso dmg/.nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v0.0.7/nanobox-boot2docker.box
 
@@ -31,7 +27,7 @@ pkgbuild \
   --identifier com.nanobox.nanobox \
   --version "0.0.7" \
   --install-location "/opt/nanobox" \
-  --scripts "scripts-all" \
+  --scripts "scripts" \
   --timestamp=none \
   core.pkg
 

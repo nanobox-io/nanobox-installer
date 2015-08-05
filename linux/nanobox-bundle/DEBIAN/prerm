@@ -1,6 +1,8 @@
 #!/bin/sh -e
 if [ "$1" = "remove" ]; then
-  dpkg -r nanobox
-  dpkg -r vagrant
-  dpkg -r virtualbox
+  rm /var/lib/dpkg/lock
+  which nanobox    && dpkg --purge nanobox
+  which vagrant    && dpkg --purge vagrant
+  which vboxmanage && dpkg --purge virtualbox-5.0
+  touch /var/lib/dpkg/lock
 fi
