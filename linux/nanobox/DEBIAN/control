@@ -2,8 +2,9 @@ Package: nanobox
 Version: 0.0.7
 Section: base
 Priority: optional
-Architecture: all
+Architecture: amd64
 Depends: vagrant, virtualbox
-Maintainer: Steve Domino <sdomino@pagodabox.com>
+Maintainer: Pagoda Box <sdomino@pagodabox.com>
 Description: Nanobox cli utility
  This tool provides a simple, quick dev environment.
+Homepage: http://nanobox.io/

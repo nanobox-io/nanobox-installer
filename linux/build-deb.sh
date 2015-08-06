@@ -17,5 +17,3 @@ fi
 gzip --best nanobox/usr/share/man/man1/nanobox.1
 # build package
 dpkg-deb --build nanobox
-# rename package
-mv nanobox.deb nanobox-${NANOBOX_VERS}.deb

@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # cleanup from a previous build
-[ -f nanobox.dmg ] && rm -f nanobox.dmg
+[ -f nanobox-bundle.dmg ] && rm -f nanobox-bundle.dmg
 [ -f dmg/nanobox.pkg ] && rm -f dmg/nanobox.pkg
 [ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
 
@@ -98,7 +98,7 @@ hdiutil convert \
   "temp.dmg" \
   -format UDZO \
   -imagekey zlib-level=9 \
-  -o "nanobox.dmg"
+  -o "nanobox-bundle.dmg"
 
 # cleanup temp things
 rm -f temp.dmg
