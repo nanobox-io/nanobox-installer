@@ -37,11 +37,9 @@ for file in "${my_files[@]}"; do
 done
 
 echo ""
-echo "'bundle' includes Vagrant and VirtualBox"
-echo "'nanobox' includes nanobox binary and Vagrant box"
-echo "What would you like to uninstall (bundle/nanobox)?"
+echo "Do you want to uninstall nanobox (Yes/No)?"
 read my_answer
-if [ "$my_answer" != "bundle" ] && [ "$my_answer" != "nanobox" ]; then
+if [ "$my_answer" != "Yes" ] && [ "$my_answer" != "yes" ]; then
     echo "Aborting install. (answer: ${my_answer})"
     key_exit 2
 fi
@@ -55,7 +53,7 @@ echo ""
 # Use AppleScript so we can use a graphical `sudo` prompt.
 # This way, people can enter the username they wish to use
 # for sudo, and it is more Apple-like.
-osascript -e "do shell script \"/bin/rm -Rf ${my_files[*]}\" with administrator privileges"
+osascript -e "do shell script \"/bin/rm -Rf ${my_files[*]}\" with administrator privileges with title nanobox"
 
 # Verify that the uninstall succeeded by checking whether every file
 # we meant to remove is actually removed.
@@ -77,25 +75,32 @@ fi
 echo "Successfully uninstalled nanobox."
 
 # Run the uninstall.tool scripts of vagrant and virtualbox also (if selected)
-if [ "$my_answer" == "bundle" ]; then
-    my_answer=''
-    echo "Uninstalling vagrant.."
-    which vagrant &> /dev/null
-    if [[ $? -eq 0 ]]; then
-        hdiutil mount /Volumes/nanobox/.vagrant.dmg &> /dev/null
-        ( exec /Volumes/Vagrant/uninstall.tool )
-        hdiutil unmount /Volumes/Vagrant &> /dev/null
-    fi
-    
-    echo "Uninstalling virtualbox.."
-    which vboxmanage &> /dev/null
-    if [[ $? -eq 0 ]]; then
-        hdiutil mount /Volumes/nanobox/.virtualbox.dmg &> /dev/null
-        ( exec /Volumes/VirtualBox/VirtualBox_Uninstall.tool )
-        hdiutil unmount /Volumes/VirtualBox/ &> /dev/null
-    fi
+my_answer=''
+echo ""
+echo "Do you want to uninstall Vagrant and VirtualBox also (Yes/No)?"
+read my_answer
+if [ "$my_answer" != "Yes" ] && [ "$my_answer" != "yes" ]; then
+    echo ""
+    echo "Done."
+    echo "Aborting Vagrant/VirtualBox uninstall. (answer: ${my_answer})"
+    key_exit 0
 fi
 
-echo ""
-echo "Done."
+my_answer=''
+echo "Uninstalling vagrant.."
+which vagrant &> /dev/null
+if [[ $? -eq 0 ]]; then
+    hdiutil mount /Volumes/nanobox/.vagrant.dmg &> /dev/null
+    ( exec /Volumes/Vagrant/uninstall.tool )
+    hdiutil unmount /Volumes/Vagrant &> /dev/null
+fi
+
+echo "Uninstalling virtualbox.."
+which vboxmanage &> /dev/null
+if [[ $? -eq 0 ]]; then
+    hdiutil mount /Volumes/nanobox/.virtualbox.dmg &> /dev/null
+    ( exec /Volumes/VirtualBox/VirtualBox_Uninstall.tool )
+    hdiutil unmount /Volumes/VirtualBox/ &> /dev/null
+fi
+
 key_exit 0

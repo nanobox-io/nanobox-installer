@@ -82,7 +82,7 @@ echo '
       set background picture of theViewOptions to file ".support:'background.png'"
       delay 5
       set position of item "'nanobox.pkg'" of container window to {465, 145}
-      set position of item "'uninstall.tool'" of container window to {465, 345}
+      set position of item "'.uninstall.tool'" of container window to {465, 345}
       update without registering applications
       delay 5
     end tell
@@ -100,5 +100,12 @@ hdiutil convert \
   -imagekey zlib-level=9 \
   -o "nanobox-bundle.dmg"
 
+# Set icon on .dmg
+sips -i ../windows/resources/nanobox.png
+derez -only icns ../windows/resources/nanobox.png > nano.rsrc
+rez -append nano.rsrc -o nanobox-bundle.dmg 
+setfile -a C nanobox-bundle.dmg 
+
 # cleanup temp things
 rm -f temp.dmg
+rm -f nano.rsrc
