@@ -61,6 +61,7 @@ $contents = @"
     Version="$($NanoboxVersion)"
     Manufacturer="Pagoda Box"
     Name="nanobox"
+    IconSourceFile="resources\nanodesk.ico"
     UpgradeCode="$($UpgradeCode)">
 
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">

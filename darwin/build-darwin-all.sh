@@ -101,11 +101,11 @@ hdiutil convert \
   -o "nanobox-bundle.dmg"
 
 # Set icon on .dmg
-sips -i ../windows/resources/nanobox.png
-derez -only icns ../windows/resources/nanobox.png > nano.rsrc
-rez -append nano.rsrc -o nanobox-bundle.dmg 
-setfile -a C nanobox-bundle.dmg 
+sips -i resources/nanodesk.icns
+derez -only icns resources/nanodesk.icns > nanodesk.rsrc
+rez -append nanodesk.rsrc -o nanobox-bundle.dmg
+setfile -a C nanobox-bundle.dmg
 
 # cleanup temp things
 rm -f temp.dmg
-rm -f nano.rsrc
+rm -f nanodesk.rsrc

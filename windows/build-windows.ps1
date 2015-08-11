@@ -94,6 +94,8 @@ $contents = @"
            Version="`$(var.VersionNumber)"
            Manufacturer="!(loc.ManufacturerName)"
            UpgradeCode="`$(var.UpgradeCode)">
+    <Icon Id="icon.ico" SourceFile="$($InstallerTmpDir)\resources\nanodesk.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <!-- Define the package information -->
     <Package Compressed="yes"

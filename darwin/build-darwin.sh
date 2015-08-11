@@ -87,6 +87,11 @@ echo '
   end tell
 ' | osascript
 
+sips -i resources/nanodesk.icns
+derez -only icns resources/nanodesk.icns > nanodesk.rsrc
+rez -append nanodesk.rsrc -o /Volumes/nanobox/nanobox.pkg
+setfile -a C /Volumes/nanobox/nanobox.pkg
+
 # set the permissions and generate the final DMG
 sudo chmod -Rf go-w /Volumes/nanobox
 sync
@@ -99,11 +104,11 @@ hdiutil convert \
   -o "nanobox.dmg"
 
 # Set icon on .dmg
-sips -i ../windows/resources/nanobox.png
-derez -only icns ../windows/resources/nanobox.png > nano.rsrc
-rez -append nano.rsrc -o nanobox.dmg 
-setfile -a C nanobox.dmg 
+sips -i resources/nanodesk.icns
+derez -only icns resources/nanodesk.icns > nanodesk.rsrc
+rez -append nanodesk.rsrc -o nanobox-bundle.dmg
+setfile -a C nanobox-bundle.dmg
 
 # cleanup temp things
 rm -f temp.dmg
-rm -f nano.rsrc
+rm -f nanodesk.rsrc
