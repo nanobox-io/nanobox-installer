@@ -1,13 +1,13 @@
 # Exit if there are any exceptions
 $ErrorActionPreference = "Stop"
 
-$Boot2DockerVersion = "0.0.7"
-# Final path to output
-$OutputPath = "nanobox_$($NanoboxVersion).msi"
-
 # Needs to change each release
 $UpgradeCode = "f44a14ed-849a-4acd-a537-51395f7d5958"
 $NanoboxVersion = "0.0.7"
+$Boot2DockerVersion = "0.0.7"
+
+# Final path to output
+$OutputPath = "nanobox_$($NanoboxVersion).msi"
 
 # Get the directory to this script
 $Dir = Split-Path $script:MyInvocation.MyCommand.Path
@@ -61,6 +61,8 @@ Copy-Item "$($Dir)\resources\license.rtf" `
     -Destination "$($InstallerTmpDir)\resources\license.rtf"
 Copy-Item "$($Dir)\resources\nanobox-en-us.wxl" `
     -Destination "$($InstallerTmpDir)\nanobox-en-us.wxl"
+Copy-Item "$($Dir)\resources\nanodesk.ico" `
+    -Destination "$($InstallerTmpDir)\resources\nanodesk.ico"
 
 # nanobox-config.wxi
 $contents = @"
@@ -94,8 +96,6 @@ $contents = @"
            Version="`$(var.VersionNumber)"
            Manufacturer="!(loc.ManufacturerName)"
            UpgradeCode="`$(var.UpgradeCode)">
-    <Icon Id="icon.ico" SourceFile="$($InstallerTmpDir)\resources\nanodesk.ico"/>
-    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <!-- Define the package information -->
     <Package Compressed="yes"
@@ -149,6 +149,10 @@ $contents = @"
         </Directory>
       </Directory>
     </Directory>
+
+    <!-- Add nanobox icon -->
+    <Icon Id="icon.ico" SourceFile="$($InstallerTmpDir)\resources\nanodesk.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <!-- Add nanobox-boot2docker box after install -->
     <CustomAction Id="AddBox"
