@@ -1,6 +1,6 @@
 Package: nanobox-bundle
 Version: 0.0.7
-Section: base
+Section: devel
 Priority: optional
 Architecture: amd64
 Maintainer: Pagoda Box <lintong@pagodabox.com>

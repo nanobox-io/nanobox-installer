@@ -15,5 +15,10 @@ if ! [ -a nanobox-bundle/opt/nanobox/share/vagrant.deb ]; then
   wget -O nanobox-bundle/opt/nanobox/share/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_${VAGRANT_VERS}_x86_64.deb
 fi
 
+chmod 644 nanobox-bundle/opt/nanobox/share/virtualbox.deb
+chmod 644 nanobox-bundle/opt/nanobox/share/vagrant.deb
+
+find nanobox-bundle -type d | xargs chmod 755
+
 # build package
-dpkg-deb --build nanobox-bundle
+fakeroot dpkg-deb --build nanobox-bundle

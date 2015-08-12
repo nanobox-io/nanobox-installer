@@ -1,6 +1,6 @@
 Package: nanobox
 Version: 0.0.7
-Section: base
+Section: devel
 Priority: optional
 Architecture: amd64
 Depends: vagrant, virtualbox
