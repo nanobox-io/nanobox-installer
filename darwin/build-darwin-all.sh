@@ -1,11 +1,9 @@
 #!/bin/bash -x
 
 # cleanup from a previous build
-[ -f nanobox.dmg ] && rm -f nanobox.dmg
+[ -f nanobox-bundle.dmg ] && rm -f nanobox-bundle.dmg
 [ -f dmg/nanobox.pkg ] && rm -f dmg/nanobox.pkg
 [ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
-[ -f dmg/.virtualbox.dmg ] && rm -f dmg/.virtualbox.dmg
-[ -f dmg/.vagrant.dmg ] && rm -f dmg/.vagrant.dmg
 
 # prep dirs
 mkdir -p \
@@ -16,6 +14,10 @@ mkdir -p \
 # nanobox
 curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
 chmod 755 nanobox/bin/nanobox
+# virtualbox
+[ -f dmg/.virtualbox.dmg ] || curl -fLkso dmg/.virtualbox.dmg 'http://download.virtualbox.org/virtualbox/5.0.0/VirtualBox-5.0.0-101573-OSX.dmg'
+# vagrant
+[ -f dmg/.vagrant.dmg ] || curl -fLkso dmg/.vagrant.dmg 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.3.dmg'
 # boot2docker box
 [ -f dmg/.nanobox-boot2docker.box ] || curl -fLkso dmg/.nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v0.0.7/nanobox-boot2docker.box
 
@@ -29,7 +31,7 @@ pkgbuild \
   --identifier com.nanobox.nanobox \
   --version "0.0.7" \
   --install-location "/opt/nanobox" \
-  --scripts "scripts" \
+  --scripts "scripts-all" \
   --timestamp=none \
   core.pkg
 
@@ -87,11 +89,6 @@ echo '
   end tell
 ' | osascript
 
-sips -i resources/nanodesk.icns
-derez -only icns resources/nanodesk.icns > nanodesk.rsrc
-rez -append nanodesk.rsrc -o /Volumes/nanobox/nanobox.pkg
-setfile -a C /Volumes/nanobox/nanobox.pkg
-
 # set the permissions and generate the final DMG
 sudo chmod -Rf go-w /Volumes/nanobox
 sync
@@ -101,7 +98,7 @@ hdiutil convert \
   "temp.dmg" \
   -format UDZO \
   -imagekey zlib-level=9 \
-  -o "nanobox.dmg"
+  -o "nanobox-bundle.dmg"
 
 # Set icon on .dmg
 sips -i resources/nanodesk.icns

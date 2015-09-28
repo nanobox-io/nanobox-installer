@@ -1,0 +1,14 @@
+#!/bin/sh -e
+# Automatically added by dh_installdocs
+if [ "$1" = "configure" ]; then
+  if [ -d /usr/doc -a ! -e /usr/doc/nanobox -a -d /usr/share/doc/nanobox ]; then
+    ln -sf ../share/doc/nanobox /usr/doc/nanobox
+  fi
+# End automatically added section
+
+  ln -sf /opt/nanobox/bin/nanobox /usr/local/bin/nanobox
+  which vagrant > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    vagrant box add --force --name nanobox/boot2docker /opt/nanobox/share/nanobox-boot2docker.box > /dev/null 2>&1
+  fi
+fi

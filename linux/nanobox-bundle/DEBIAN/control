@@ -1,0 +1,9 @@
+Package: nanobox-bundle
+Version: 0.0.7
+Section: devel
+Priority: optional
+Architecture: amd64
+Maintainer: Pagoda Box <lintong@pagodabox.com>
+Description: Nanobox bundle
+ This meta package provides nanobox cli utility, VirtualBox, and Vagrant
+Homepage: http://nanobox.io/
