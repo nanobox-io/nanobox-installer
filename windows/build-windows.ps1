@@ -4,10 +4,9 @@ $ErrorActionPreference = "Stop"
 # Needs to change each release
 $UpgradeCode = "f44a14ed-849a-4acd-a537-51395f7d5958"
 $NanoboxVersion = "0.0.7"
-$Boot2DockerVersion = "0.0.7"
 
 # Final path to output
-$OutputPath = "nanobox_$($NanoboxVersion).msi"
+$OutputPath = "nanobox.msi"
 
 # Get the directory to this script
 $Dir = Split-Path $script:MyInvocation.MyCommand.Path
@@ -36,7 +35,7 @@ $client.DownloadFile($nanoboxSourceURL, $nanoboxDest)
 Write-Host "Downloaded nanobox: $($NanoboxVersion)"
 
 # Download nanobox-boot2docker
-$nanoboxDockerSourceURL = "https://github.com/pagodabox/nanobox-boot2docker/releases/download/v$($Boot2DockerVersion)/nanobox-boot2docker.box"
+$nanoboxDockerSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/boxes/vagrant/nanobox-boot2docker.box"
 $nanoboxDockerDest      = "$($NanoboxTmpDir)/nanobox-boot2docker.box"
 
 Write-Host "Downloading nanobox-boot2docker: $($NanoboxVersion)"

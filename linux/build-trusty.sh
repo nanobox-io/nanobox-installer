@@ -59,7 +59,7 @@ wget -O nanobox/bin/nanobox https://s3.amazonaws.com/tools.nanobox.io/cli/linux/
 chmod 755 nanobox/bin/nanobox
 
 # boot2docker image
-wget -O nanobox/lib/nanobox-boot2docker.box https://github.com/pagodabox/nanobox-boot2docker/releases/download/v0.0.7/nanobox-boot2docker.box
+wget -O nanobox/lib/nanobox-boot2docker.box https://s3.amazonaws.com/tools.nanobox.io/boxes/vagrant/nanobox-boot2docker.box
 
 # create fat installer
 tar -czf nanobox.tgz nanobox/

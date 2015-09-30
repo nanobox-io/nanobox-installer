@@ -5,7 +5,7 @@ $NanoboxVersion    = "0.0.7"
 $VagrantVersion    = "1.7.4"
 $VirtualBoxVersion = "5.0.0"
 
-$OutputPath = "nanobox_$($NanoboxVersion).exe"
+$OutputPath = "nanobox-bundle.exe"
 
 # Needs to change each release
 $UpgradeCode = "aebc37e1-83e6-4833-8e95-83c42a2fa1a9"
