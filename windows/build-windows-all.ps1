@@ -27,10 +27,13 @@ Write-Host "nanobox temp dir: $($NanoboxTmpDir)"
 $NanoboxSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/installers/windows/nanobox.msi"
 $NanoboxDest      = "$($NanoboxTmpDir)/nanobox.msi"
 
-Write-Host "Downloading nanobox: $($NanoboxVersion)"
-$client = New-Object System.Net.WebClient
-$client.DownloadFile($NanoboxSourceURL, $NanoboxDest)
-Write-Host "Downloaded nanobox: $($NanoboxVersion)"
+# Write-Host "Downloading nanobox: $($NanoboxVersion)"
+# $client = New-Object System.Net.WebClient
+# $client.DownloadFile($NanoboxSourceURL, $NanoboxDest)
+# Write-Host "Downloaded nanobox: $($NanoboxVersion)"
+
+# Write-Host "Copying nanobox: $($NanoboxVersion)"
+Copy-Item nanobox.msi $NanoboxDest
 
 # Download vagrant
 $VagrantSourceURL = "https://dl.bintray.com/mitchellh/vagrant/vagrant_$($VagrantVersion).msi"

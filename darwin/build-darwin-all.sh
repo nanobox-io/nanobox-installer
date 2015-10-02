@@ -42,6 +42,7 @@ productbuild \
   --distribution nanobox.dist \
   --resources resources \
   --timestamp=none \
+  --sign "Developer ID Installer: Eric Graybill" \
   dmg/nanobox.pkg
 
 # cleanup cor build
@@ -64,7 +65,7 @@ hdiutil create \
 # attach and read the temporary DMG device
 DEVICE=$(hdiutil attach -readwrite -noverify -noautoopen "./temp.dmg" | egrep '^/dev/' | sed 1q | awk '{print $1}')
 
-sleep 2
+sleep 9
 
 # make finder deal look nice
 echo '
