@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 
 $NanoboxVersion    = "0.0.7"
 $VagrantVersion    = "1.7.4"
-$VirtualBoxVersion = "5.0.0"
+$VirtualBoxVersion = "5.0.8"
 
 $OutputPath = "nanobox-bundle.exe"
 
@@ -45,7 +45,7 @@ $client.DownloadFile($VagrantSourceURL, $VagrantDest)
 Write-Host "Downloaded vagrant: $($VagrantVersion)"
 
 # Download virtualbox
-$VirtualBoxSourceURL = "http://download.virtualbox.org/virtualbox/$($VirtualBoxVersion)/VirtualBox-$($VirtualBoxVersion)-101573-Win.exe"
+$VirtualBoxSourceURL = "http://download.virtualbox.org/virtualbox/5.0.8/VirtualBox-5.0.8-103449-Win.exe"
 $VirtualBoxDest      = "$($NanoboxTmpDir)/virtualbox.exe"
 
 Write-Host "Downloading virtualbox: $($VirtualBoxVersion)"
