@@ -1,6 +1,6 @@
 mkdir -p nanobox-bundle/opt/nanobox/share
-VAGRANT_VERS="1.7.3"
-VIRTUALBOX_VERS="5.0.0"
+VAGRANT_VERS="1.7.4"
+VIRTUALBOX_VERS="5.0.8"
 
 # Fetch installers
 # nanobox
@@ -8,7 +8,7 @@ cp nanobox.deb nanobox-bundle/opt/nanobox/share/nanobox.deb
 
 # virtualbox
 if ! [ -a nanobox-bundle/opt/nanobox/share/virtualbox.deb ]; then
-  wget -O nanobox-bundle/opt/nanobox/share/virtualbox.deb http://download.virtualbox.org/virtualbox/${VIRTUALBOX_VERS}/virtualbox-5.0_${VIRTUALBOX_VERS}-101573~Ubuntu~trusty_amd64.deb
+  wget -O nanobox-bundle/opt/nanobox/share/virtualbox.deb http://download.virtualbox.org/virtualbox/5.0.8/virtualbox-5.0_5.0.8-103449~Ubuntu~trusty_amd64.deb
 fi
 # vagrant
 if ! [ -a nanobox-bundle/opt/nanobox/share/vagrant.deb ]; then

@@ -1,9 +1,11 @@
 # Exit if there are any exceptions
 $ErrorActionPreference = "Stop"
 
-# Needs to change each release
+# Allows Windows to keep track of app for upgrades
 $UpgradeCode = "f44a14ed-849a-4acd-a537-51395f7d5958"
-$NanoboxVersion = "0.0.7"
+
+# Needs to change with each release
+$NanoboxVersion = "0.0.9"
 
 # Final path to output
 $OutputPath = "nanobox.msi"
@@ -88,8 +90,8 @@ $contents = @"
   <!-- Include our wxi -->
   <?include "$($InstallerTmpDir)\nanobox-config.wxi" ?>
 
-  <!-- The main product -->
-  <Product Id="75428ecc-f4b9-4f3b-9ed2-fe8357acf35d"
+  <!-- The main product (Product ID is generated on each build) -->
+  <Product Id="*"
            Language="!(loc.LANG)"
            Name="!(loc.ProductName)"
            Version="`$(var.VersionNumber)"
@@ -153,12 +155,12 @@ $contents = @"
     <Icon Id="icon.ico" SourceFile="$($InstallerTmpDir)\resources\nanodesk.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
-    <!-- Add nanobox-boot2docker box after install -->
+    <!-- Add nanobox-boot2docker box after install (Return="check" to force)-->
     <CustomAction Id="AddBox"
                   Directory="NANOBOXAPPDIR"
                   ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box add --name nanobox/boot2docker --force &quot;[NANOBOXAPPDIR]\nanobox-boot2docker.box&quot;"
                   Execute="commit"
-                  Return="check"/>
+                  Return="ignore"/>
 
     <InstallExecuteSequence>
       <Custom Action="AddBox" After="InstallFiles">Not Installed AND Not UpgradingProductCode</Custom>
@@ -169,7 +171,7 @@ $contents = @"
                   Directory="NANOBOXAPPDIR"
                   ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box remove --force nanobox/boot2docker"
                   Execute="commit"
-                  Return="check"/>
+                  Return="ignore"/>
 
     <InstallExecuteSequence>
       <Custom Action="DelBox" After="InstallFiles">Remove AND Not UpgradingProductCode</Custom>
