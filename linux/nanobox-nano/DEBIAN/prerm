@@ -1,0 +1,8 @@
+#!/bin/sh -e
+if [ "$1" = "upgrade" -o "$1" = "remove" ]; then
+  rm -f /usr/local/bin/nanobox
+
+  if [ -L /usr/doc/nanobox ]; then
+    rm -f /usr/doc/nanobox
+  fi
+fi

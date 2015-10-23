@@ -1,0 +1,65 @@
+.TH NANOBOX 1 "03 Aug 2015" "0.0.7"
+.SH NAME
+nanobox \- nanobox command line utility
+
+                                     ***
+                                  *********
+                             *******************
+                         ***************************
+                             *******************
+                         ...      *********      ...
+                             ...     ***     ...
+                         +++      ...   ...      +++
+                             +++     ...     +++
+                         \\\\\\      +++   +++      ///
+                             \\\\\\     +++     ///
+                                  \\\\     //
+                                     \\//
+
+                      _  _ ____ _  _ ____ ___  ____ _  _
+                      |\\ | |__| |\\ | |  | |__) |  |  \\/
+                      | \\| |  | | \\| |__| |__) |__| _/\\_
+
+
+.SH SYNOPSIS
+nanobox <COMMAND> [--debug]
+
+.SH DESCRIPTION
+Welcome to the nanobox CLI! This will be your primary tool when working with
+nanobox. If you encounter any issues or have any suggestions, find us on
+IRC (freenode) at #nanobox. Our engineers are available between 8 - 5pm MST.
+
+All commands have a short [-*] and a verbose [--*] option when passing flags.
+
+You can pass -h, --help, or help to any command to receive detailed information
+about that command.
+
+You can pass --debug at the end of any command to see all request/response
+output when making API calls.
+
+.SH OPTIONS
+-h, --help, help
+  Run anytime to receive detailed information about a command.
+
+-v, --version, version
+  Run anytime to see the current version of the CLI.
+
+--debug
+  Shows all API request/response output. MUST APPEAR LAST
+
+.SH COMMANDS
+.IP "create      : Runs an 'init' and starts a nanobox VM"
+.IP "deploy      : Deploys to your nanobox VM"
+.IP "destroy     : Destroys the current nanobox VM"
+.IP "halt        : Halts the current nanobox VM"
+.IP "help        : Display this help"
+.IP "init        : Creates a nanobox flavored Vagrantfile"
+.IP "log         : Show/Stream nanobox logs"
+.IP "new         : Create a new nanobox developer project"
+.IP "publish     : Publish your nanobox live"
+.IP "reload      :"
+.IP "resume      : Resumes a halted/suspened nanobox VM"
+.IP "status      : Display all current nanobox VM's"
+.IP "suspend     : Suspends the current nanobox VM"
+.IP "up          : Runs a 'create' and a 'deploy'"
+.IP "update      : Updates this CLI to the newest version"
