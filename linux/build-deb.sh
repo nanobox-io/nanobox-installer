@@ -1,14 +1,10 @@
 mkdir -p nanobox/opt/nanobox/bin
 mkdir -p nanobox/opt/nanobox/share
 
-if ! [ -x nanobox/opt/nanobox/bin/nanobox ]; then
-  wget -O nanobox/opt/nanobox/bin/nanobox https://s3.amazonaws.com/tools.nanobox.io/cli/linux/amd64/nanobox
-  chmod 755 nanobox/opt/nanobox/bin/nanobox
-fi
+wget -O nanobox/opt/nanobox/bin/nanobox https://s3.amazonaws.com/tools.nanobox.io/cli/linux/amd64/nanobox
+chmod 755 nanobox/opt/nanobox/bin/nanobox
 
-if ! [ -a nanobox/opt/nanobox/share/nanobox-boot2docker.box ]; then
-  wget -O nanobox/opt/nanobox/share/nanobox-boot2docker.box https://s3.amazonaws.com/tools.nanobox.io/boxes/vagrant/nanobox-boot2docker.box
-fi
+wget -O nanobox/opt/nanobox/share/nanobox-boot2docker.box https://s3.amazonaws.com/tools.nanobox.io/boxes/vagrant/nanobox-boot2docker.box
 
 # gzip docs
 gzip --best nanobox/usr/share/man/man1/nanobox.1
