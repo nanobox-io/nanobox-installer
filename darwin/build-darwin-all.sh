@@ -4,6 +4,7 @@
 [ -f nanobox-bundle.dmg ] && rm -f nanobox-bundle.dmg
 [ -f dmg/nanobox.pkg ] && rm -f dmg/nanobox.pkg
 [ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
+[ -d /Volumes/nanobox ] && hdiutil detach -force /Volumes/nanobox
 
 # prep dirs
 mkdir -p \

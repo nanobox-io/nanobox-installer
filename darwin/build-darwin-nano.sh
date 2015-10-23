@@ -7,6 +7,7 @@
 [ -f dmg/.virtualbox.dmg ] && rm -f dmg/.virtualbox.dmg
 [ -f dmg/.vagrant.dmg ] && rm -f dmg/.vagrant.dmg
 [ -f dmg/.nanobox-boot2docker.box ] && rm -f dmg/.nanobox-boot2docker.box
+[ -d /Volumes/nanobox ] && hdiutil detach -force /Volumes/nanobox
 
 # prep dirs
 mkdir -p \
@@ -15,13 +16,42 @@ mkdir -p \
 
 # get mac bins
 # nanobox
-curl -fLkso dmg/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
-chmod 755 dmg/nanobox
+curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
+chmod 755 nanobox/bin/nanobox
 
 sips -i resources/nanodesk.icns
 derez -only icns resources/nanodesk.icns > nanodesk.rsrc
-rez -append nanodesk.rsrc -o dmg/nanobox
-setfile -a C dmg/nanobox
+rez -append nanodesk.rsrc -o nanobox/bin/nanobox
+setfile -a C nanobox/bin/nanobox
+
+#########################################################
+#   PKG
+#########################################################
+# build core.pkg
+echo "Building core.pkg"
+pkgbuild \
+  --root nanobox \
+  --identifier com.nanobox.nanobox \
+  --version "0.0.7" \
+  --install-location "/opt/nanobox" \
+  --timestamp=none \
+  core.pkg
+
+
+echo "Building nanobox.pkg"
+# build nanobox.pkg
+productbuild \
+  --distribution nanobox-nano.dist \
+  --resources resources \
+  --timestamp=none \
+  --sign "Developer ID Installer: Eric Graybill" \
+  dmg/nanobox.pkg
+
+# cleanup cor build
+rm -f core.pkg
+
+rez -append nanodesk.rsrc -o dmg/nanobox.pkg
+setfile -a C dmg/nanobox.pkg
 
 #########################################################
 #   DMG
@@ -47,22 +77,18 @@ echo '
   tell application "Finder"
     tell disk "'nanobox'"
       open
-      delay 20
+      delay 9
       set current view of container window to icon view
       set toolbar visible of container window to false
       set statusbar visible of container window to false
-      set the bounds of container window to {400, 100, 885, 430}
+      set the bounds of container window to {100, 100, 710, 530}
       set theViewOptions to the icon view options of container window
       set arrangement of theViewOptions to not arranged
       set icon size of theViewOptions to 72
-
       delay 9
+
       set background picture of theViewOptions to file ".support:'background.png'"
-      delay 9
-
-      make new alias file at container window to POSIX file "/Applications" with properties {name:"Applications"}
-      set position of item "'nanobox'" of container window to {100, 100}
-      set position of item "'Applications'" of container window to {375, 100}
+      set position of item "'nanobox.pkg'" of container window to {465, 145}
       delay 5
 
       update without registering applications

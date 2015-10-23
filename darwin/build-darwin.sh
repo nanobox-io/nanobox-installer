@@ -6,6 +6,7 @@
 [ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
 [ -f dmg/.virtualbox.dmg ] && rm -f dmg/.virtualbox.dmg
 [ -f dmg/.vagrant.dmg ] && rm -f dmg/.vagrant.dmg
+[ -d /Volumes/nanobox ] && hdiutil detach -force /Volumes/nanobox
 
 # prep dirs
 mkdir -p \

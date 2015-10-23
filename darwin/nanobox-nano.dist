@@ -3,7 +3,7 @@
 
     <!-- Configure the visuals and the various pages that exist throughout
          the installation process. -->
-    <license file="tos.html"
+    <license file="tos-nano.html"
         mime-type="text/html" />
 
     <!-- Don't let the user customize the install (i.e. choose what
