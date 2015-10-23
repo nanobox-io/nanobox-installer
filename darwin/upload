@@ -1,2 +1,2 @@
 #!/bin/bash
-s3cmd --acl-public put nanobox.dmg nanobox-nano.dmg nanobox-bundle.dmg s3://tools.nanobox.io/installers/mac/
+s3cmd --acl-public put nanobox.dmg nanobox-micro.dmg nanobox-bundle.dmg s3://tools.nanobox.io/installers/mac/
