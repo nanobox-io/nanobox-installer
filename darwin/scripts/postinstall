@@ -11,7 +11,7 @@ chflags hidden /opt
 
 vagrant box list | grep '^nanobox/boot2docker ' &> /dev/null
 if [[ $? -ne 0 ]]; then
-  vagrant box add --name nanobox/boot2docker /Volumes/nanobox/.nanobox-boot2docker.box
+  vagrant box add --name nanobox/boot2docker
 fi
 
 # Exit with a success code

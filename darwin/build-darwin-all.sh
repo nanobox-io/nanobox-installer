@@ -19,8 +19,12 @@ chmod 755 nanobox/bin/nanobox
 [ -f dmg/.virtualbox.dmg ] || curl -fLkso dmg/.virtualbox.dmg 'http://download.virtualbox.org/virtualbox/5.0.8/VirtualBox-5.0.8-103449-OSX.dmg'
 # vagrant
 [ -f dmg/.vagrant.dmg ] || curl -fLkso dmg/.vagrant.dmg 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4.dmg'
-# boot2docker box
-[ -f dmg/.nanobox-boot2docker.box ] || curl -fLkso dmg/.nanobox-boot2docker.box https://s3.amazonaws.com/tools.nanobox.io/boxes/vagrant/nanobox-boot2docker.box
+
+# set icon for nanobox bin
+sips -i resources/nanodesk.icns
+derez -only icns resources/nanodesk.icns > nanodesk.rsrc
+rez -append nanodesk.rsrc -o nanobox/bin/nanobox
+setfile -a C nanobox/bin/nanobox
 
 #########################################################
 #   PKG
@@ -48,6 +52,10 @@ productbuild \
 
 # cleanup cor build
 rm -f core.pkg
+
+# set icon for pkg file
+rez -append nanodesk.rsrc -o dmg/nanobox.pkg
+setfile -a C dmg/nanobox.pkg
 
 #########################################################
 #   DMG
