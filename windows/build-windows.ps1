@@ -146,17 +146,6 @@ $contents = @"
     <Icon Id="icon.ico" SourceFile="$($InstallerTmpDir)\resources\nanodesk.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
-    <!-- Add nanobox-boot2docker box after install (Return="check" to force)-->
-    <CustomAction Id="AddBox"
-                  Directory="NANOBOXAPPDIR"
-                  ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box add --name nanobox/boot2docker --force"
-                  Execute="commit"
-                  Return="ignore"/>
-
-    <InstallExecuteSequence>
-      <Custom Action="AddBox" After="InstallFiles">Not Installed AND Not UpgradingProductCode</Custom>
-    </InstallExecuteSequence>
-
     <!-- Remove nanobox-boot2docker box on uninstall -->
     <CustomAction Id="DelBox"
                   Directory="NANOBOXAPPDIR"
