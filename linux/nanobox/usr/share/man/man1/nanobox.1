@@ -1,4 +1,4 @@
-.TH NANOBOX 1 "03 Aug 2015" "0.0.7"
+.TH NANOBOX 1 "13 Nov 2015" "0.16.4"
 .SH NAME
 nanobox \- nanobox command line utility
 
@@ -22,7 +22,7 @@ nanobox \- nanobox command line utility
 
 
 .SH SYNOPSIS
-nanobox <COMMAND> [--debug]
+nanobox <COMMAND> [--verbose]
 
 .SH DESCRIPTION
 Welcome to the nanobox CLI! This will be your primary tool when working with
@@ -34,32 +34,30 @@ All commands have a short [-*] and a verbose [--*] option when passing flags.
 You can pass -h, --help, or help to any command to receive detailed information
 about that command.
 
-You can pass --debug at the end of any command to see all request/response
-output when making API calls.
-
 .SH OPTIONS
 -h, --help, help
   Run anytime to receive detailed information about a command.
 
--v, --version, version
+--version
   Run anytime to see the current version of the CLI.
 
---debug
-  Shows all API request/response output. MUST APPEAR LAST
+--background
+  Stops nanobox from auto-supending
+
+-v, --verbose
+  Increase command output from 'info' to 'debug'
+
+-f, --force
+  Forces a command to run (effects vary per command)
 
 .SH COMMANDS
-.IP "create      : Runs an 'init' and starts a nanobox VM"
-.IP "deploy      : Deploys to your nanobox VM"
-.IP "destroy     : Destroys the current nanobox VM"
-.IP "halt        : Halts the current nanobox VM"
-.IP "help        : Display this help"
-.IP "init        : Creates a nanobox flavored Vagrantfile"
-.IP "log         : Show/Stream nanobox logs"
-.IP "new         : Create a new nanobox developer project"
-.IP "publish     : Publish your nanobox live"
-.IP "reload      :"
-.IP "resume      : Resumes a halted/suspened nanobox VM"
-.IP "status      : Display all current nanobox VM's"
-.IP "suspend     : Suspends the current nanobox VM"
-.IP "up          : Runs a 'create' and a 'deploy'"
-.IP "update      : Updates this CLI to the newest version"
+.IP  "run           : Starts a nanobox, provisions the app, & runs the app's exec"
+.IP  "dev           : Starts the nanobox, provisions app, & opens an interactive terminal"
+.IP  "info          : Displays information about the nanobox and your app"
+.IP  "console       : Opens an interactive terminal from inside your app on nanobox"
+.IP  "destroy       : Destroys the nanobox"
+.IP  "stop          : Suspends the nanobox"
+.IP  "update        : Updates the CLI to the newest available version"
+.IP  "update-images : Updates the nanobox docker images"
+.IP  "box           : Subcommands for managing the nanobox/boot2docker.box"
+.IP  "engine        : Subcommands to aid in developing a custom engine"
