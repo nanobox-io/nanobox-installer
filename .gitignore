@@ -7,7 +7,6 @@ darwin/nanobox/*
 linux/*.deb
 linux/build-trusty.sh
 linux/nanobox/opt/
-linux/nanobox-nano/opt/
 linux/nanobox-bundle/opt/
 linux/nanobox/usr/share/man/man1/nanobox.1.gz
 windows/nanobox-bundle.wixpdb
