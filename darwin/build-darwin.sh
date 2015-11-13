@@ -6,6 +6,7 @@
 [ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
 [ -f dmg/.virtualbox.dmg ] && rm -f dmg/.virtualbox.dmg
 [ -f dmg/.vagrant.dmg ] && rm -f dmg/.vagrant.dmg
+[ -f dmg/.nanobox-boot2docker.box ] && rm -f dmg/.nanobox-boot2docker.box
 [ -d /Volumes/nanobox ] && hdiutil detach -force /Volumes/nanobox
 
 # prep dirs
@@ -13,12 +14,15 @@ mkdir -p \
   dmg/.support \
   nanobox/bin
 
-# get mac bins
-# nanobox
+# get nanobox mac bins
 curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
 chmod 755 nanobox/bin/nanobox
-# boot2docker box
-[ -f dmg/.nanobox-boot2docker.box ] || curl -fLkso dmg/.nanobox-boot2docker.box https://s3.amazonaws.com/tools.nanobox.io/boxes/vagrant/nanobox-boot2docker.box
+
+# set icon for nanobox bin
+sips -i resources/nanodesk.icns
+derez -only icns resources/nanodesk.icns > nanodesk.rsrc
+rez -append nanodesk.rsrc -o nanobox/bin/nanobox
+setfile -a C nanobox/bin/nanobox
 
 #########################################################
 #   PKG
@@ -28,7 +32,7 @@ echo "Building core.pkg"
 pkgbuild \
   --root nanobox \
   --identifier com.nanobox.nanobox \
-  --version "0.0.7" \
+  --version "0.16.4" \
   --install-location "/opt/nanobox" \
   --scripts "scripts" \
   --timestamp=none \
@@ -47,11 +51,15 @@ productbuild \
 # cleanup cor build
 rm -f core.pkg
 
+# set icon for pkg file
+rez -append nanodesk.rsrc -o dmg/nanobox.pkg
+setfile -a C dmg/nanobox.pkg
+
 #########################################################
 #   DMG
 #########################################################
 # create temporary DMG
-TMP_SIZE='1024m'
+TMP_SIZE='24m'
 hdiutil create \
   -srcfolder "dmg" \
   -volname "nanobox" \
@@ -71,6 +79,7 @@ echo '
   tell application "Finder"
     tell disk "'nanobox'"
       open
+      delay 5
       set current view of container window to icon view
       set toolbar visible of container window to false
       set statusbar visible of container window to false
@@ -88,11 +97,6 @@ echo '
     end tell
   end tell
 ' | osascript
-
-sips -i resources/nanodesk.icns
-derez -only icns resources/nanodesk.icns > nanodesk.rsrc
-rez -append nanodesk.rsrc -o /Volumes/nanobox/nanobox.pkg
-setfile -a C /Volumes/nanobox/nanobox.pkg
 
 # set the permissions and generate the final DMG
 sudo chmod -Rf go-w /Volumes/nanobox

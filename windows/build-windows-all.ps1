@@ -1,13 +1,13 @@
 # Exit if there are any exceptions
 $ErrorActionPreference = "Stop"
 
-$NanoboxVersion    = "0.0.7"
+$NanoboxVersion    = "0.16.4"
 $VagrantVersion    = "1.7.4"
 $VirtualBoxVersion = "5.0.8"
 
 $OutputPath = "nanobox-bundle.exe"
 
-# Needs to change each release
+# Needs to stay the same every release
 $UpgradeCode = "aebc37e1-83e6-4833-8e95-83c42a2fa1a9"
 
 # Lookup the WiX binaries, these will error if they're not on the Path

@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 $UpgradeCode = "f44a14ed-849a-4acd-a537-51395f7d5958"
 
 # Needs to change with each release
-$NanoboxVersion = "0.0.9"
+$NanoboxVersion = "0.16.4"
 
 # Final path to output
 $OutputPath = "nanobox.msi"
@@ -35,15 +35,6 @@ Write-Host "Downloading nanobox: $($NanoboxVersion)"
 $client = New-Object System.Net.WebClient
 $client.DownloadFile($nanoboxSourceURL, $nanoboxDest)
 Write-Host "Downloaded nanobox: $($NanoboxVersion)"
-
-# Download nanobox-boot2docker
-$nanoboxDockerSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/boxes/vagrant/nanobox-boot2docker.box"
-$nanoboxDockerDest      = "$($NanoboxTmpDir)/nanobox-boot2docker.box"
-
-Write-Host "Downloading nanobox-boot2docker: $($NanoboxVersion)"
-$client = New-Object System.Net.WebClient
-$client.DownloadFile($nanoboxDockerSourceURL, $nanoboxDockerDest)
-Write-Host "Downloaded nanobox-boot2docker: $($NanoboxVersion)"
 
 #--------------------------------------------------------------------
 # MSI preparation
@@ -154,17 +145,6 @@ $contents = @"
     <!-- Add nanobox icon -->
     <Icon Id="icon.ico" SourceFile="$($InstallerTmpDir)\resources\nanodesk.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-
-    <!-- Add nanobox-boot2docker box after install (Return="check" to force)-->
-    <CustomAction Id="AddBox"
-                  Directory="NANOBOXAPPDIR"
-                  ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box add --name nanobox/boot2docker --force &quot;[NANOBOXAPPDIR]\nanobox-boot2docker.box&quot;"
-                  Execute="commit"
-                  Return="ignore"/>
-
-    <InstallExecuteSequence>
-      <Custom Action="AddBox" After="InstallFiles">Not Installed AND Not UpgradingProductCode</Custom>
-    </InstallExecuteSequence>
 
     <!-- Remove nanobox-boot2docker box on uninstall -->
     <CustomAction Id="DelBox"
