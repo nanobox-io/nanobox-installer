@@ -7,8 +7,8 @@ if [ "$1" = "configure" ]; then
 # End automatically added section
 
   ln -sf /opt/nanobox/bin/nanobox /usr/local/bin/nanobox
-  which vagrant > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    vagrant box add --force --name nanobox/boot2docker /opt/nanobox/share/nanobox-boot2docker.box > /dev/null 2>&1
+  if (which vagrant > /dev/null 2>&1) ; then
+    vagrant box add --force --name nanobox/boot2docker > /dev/null 2>&1 || \
+      echo "Failed adding nanobox/boot2docker! Check network and try again."
   fi
 fi

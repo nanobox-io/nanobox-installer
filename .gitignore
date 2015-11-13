@@ -5,6 +5,7 @@ darwin/dmg/.v*
 darwin/nanobox.dmg
 darwin/nanobox/*
 linux/*.deb
+linux/build-trusty.sh
 linux/nanobox/opt/
 linux/nanobox-nano/opt/
 linux/nanobox-bundle/opt/
