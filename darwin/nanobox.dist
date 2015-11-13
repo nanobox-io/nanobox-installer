@@ -3,8 +3,6 @@
 
     <!-- Configure the visuals and the various pages that exist throughout
          the installation process. -->
-    <welcome file="welcome.html"
-        mime-type="text/html" />
     <license file="tos.html"
         mime-type="text/html" />
 

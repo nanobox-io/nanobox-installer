@@ -14,11 +14,6 @@ if [[ $? -ne 0 ]]; then
   hdiutil unmount /Volumes/Vagrant
 fi
 
-vagrant box list  | grep '^nanobox/boot2docker ' &> /dev/null
-if [[ $? -ne 0 ]]; then
-  vagrant box add --name nanobox/boot2docker /Volumes/nanobox/.nanobox-boot2docker.box
-fi
-
 which nanobox
 if [[ $? -ne 0 ]]; then
   sudo ln -sf /opt/nanobox/bin/nanobox /usr/local/bin/nanobox

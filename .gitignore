@@ -4,8 +4,9 @@ darwin/dmg/nanobox.pkg
 darwin/dmg/.v*
 darwin/nanobox.dmg
 darwin/nanobox/*
-linux/nanobox/opt/
 linux/*.deb
+linux/build-trusty.sh
+linux/nanobox/opt/
 linux/nanobox-bundle/opt/
 linux/nanobox/usr/share/man/man1/nanobox.1.gz
 windows/nanobox-bundle.wixpdb
