@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 $UpgradeCode = "f44a14ed-849a-4acd-a537-51395f7d5958"
 
 # Needs to change with each release
-$NanoboxVersion = "0.16.4"
+$NanoboxVersion = "0.16.8"
 
 # Final path to output
 $OutputPath = "nanobox.msi"

@@ -1,5 +1,5 @@
 Package: nanobox-bundle
-Version: 0.16.4
+Version: 0.16.8
 Section: devel
 Priority: optional
 Architecture: amd64
