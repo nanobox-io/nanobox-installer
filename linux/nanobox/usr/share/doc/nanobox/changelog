@@ -6,3 +6,16 @@ nanobox (0.16.4); urgency=low
   * Removed box (using atlas)
   * Updated cli manpage
  -- Pagoda Box <lintong@pagodabox.com> Fri, 13 Nov 2015 11:50:00 -0400
+
+nanobox (0.16.8); urgency=low
+  * Update to updatable nanobox version
+ -- Pagoda Box <lintong@pagodabox.com> Thur, 19 Nov 2015 17:15:00 -0400
+
+nanobox (0.16.9); urgency=low
+  * Fix console size in terminal
+  * Pass lintian checks (Lintian v2.5.22ubuntu1)
+ -- Pagoda Box <lintong@pagodabox.com> Mon, 23 Nov 2015 12:00:00 -0400
+
+nanobox (0.16.10); urgency=low
+  * Check for broken/outdated vagrant installs
+ -- Pagoda Box <lintong@pagodabox.com> Mon, 23 Nov 2015 16:00:00 -0400
