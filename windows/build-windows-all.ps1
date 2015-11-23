@@ -1,7 +1,7 @@
 # Exit if there are any exceptions
 $ErrorActionPreference = "Stop"
 
-$NanoboxVersion    = "0.16.8"
+$NanoboxVersion    = "0.16.9"
 $VagrantVersion    = "1.7.4"
 $VirtualBoxVersion = "5.0.8"
 

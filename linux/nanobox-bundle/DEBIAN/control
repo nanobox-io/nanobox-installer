@@ -1,8 +1,9 @@
 Package: nanobox-bundle
-Version: 0.16.8
+Version: 0.16.9
 Section: devel
 Priority: optional
 Architecture: amd64
+Installed-Size: 12288
 Maintainer: Pagoda Box <lintong@pagodabox.com>
 Description: Nanobox bundle
  This meta package provides nanobox cli utility, VirtualBox, and Vagrant
