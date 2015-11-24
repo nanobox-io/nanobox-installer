@@ -53,7 +53,7 @@ echo ""
 # Use AppleScript so we can use a graphical `sudo` prompt.
 # This way, people can enter the username they wish to use
 # for sudo, and it is more Apple-like.
-osascript -e "do shell script \"/bin/rm -Rf ${my_files[*]}\" with administrator privileges with title nanobox"
+osascript -e "do shell script \"/bin/rm -Rf ${my_files[*]}\" with administrator privileges"
 
 # Verify that the uninstall succeeded by checking whether every file
 # we meant to remove is actually removed.
