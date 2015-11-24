@@ -8,11 +8,25 @@ if [ "$1" = "install" -o "$1" = "upgrade" ]; then
     vbox='no'
   fi
 
-  # remove lock in order to preserve package individual-ness
-  rm -f /var/lib/dpkg/lock
-  [ -z "$vbox" ] && (dpkg -s virtualbox-5.0 > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/virtualbox.deb) || true
-  dpkg -s vagrant        > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/vagrant.deb
-  dpkg -s nanobox        > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/nanobox.deb
-  # for whatever reason, dpkg leaves nanobox-bundle half configured.
-  # everything is installed, but it needs `dpkg -i`d again.
+  [ -z "$vbox" ] && ( dpkg -s virtualbox-5.0 > /dev/null 2>&1 || install_virtualbox ) || true
+  dpkg -s vagrant        > /dev/null 2>&1 || install_vagrant
+  dpkg -s nanobox        > /dev/null 2>&1 || install_nanobox
 fi
+
+install_vagrant(){
+  echo "Installing vagrant..."
+  wget -O tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+  dpkg -i tmp/vagrant.deb
+}
+
+install_virtualbox(){
+  echo "Installing virtualbox..."
+  wget -O tmp/virtualbox.deb http://download.virtualbox.org/virtualbox/5.0.10/virtualbox-5.0_5.0.10-104061~Ubuntu~trusty_amd64.deb
+  dpkg -i tmp/virtualbox.deb
+}
+
+install_nanobox(){
+  echo "Installing nanobox..."
+  wget -O tmp/nanobox.deb https://s3.amazonaws.com/tools.nanobox.io/installers/linux/nanobox.deb
+  dpkg -i tmp/nanobox.deb
+}

@@ -24,8 +24,8 @@ $NanoboxTmpDir = [System.IO.Path]::Combine($NanoboxTmpDir, [System.IO.Path]::Get
 Write-Host "nanobox temp dir: $($NanoboxTmpDir)"
 
 # Download nanobox
-$NanoboxSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/installers/windows/nanobox.msi"
-$NanoboxDest      = "$($NanoboxTmpDir)/nanobox.msi"
+# $NanoboxSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/installers/windows/nanobox.msi"
+# $NanoboxDest      = "$($NanoboxTmpDir)/nanobox.msi"
 
 # Write-Host "Downloading nanobox: $($NanoboxVersion)"
 # $client = New-Object System.Net.WebClient
