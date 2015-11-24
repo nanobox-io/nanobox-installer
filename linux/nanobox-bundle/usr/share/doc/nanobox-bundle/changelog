@@ -5,3 +5,8 @@ nanobox-bundle (0.16.9); urgency=low
 nanobox-bundle (0.16.10); urgency=low
   * Bump nanobox version
  -- Pagoda Box <lintong@pagodabox.com> Mon, 23 Nov 2015 14:30:00 -0400
+
+nanobox-bundle (0.16.11); urgency=low
+  * Bump nanobox version
+  * Check release version before attempting to install virtualbox
+ -- Pagoda Box <lintong@pagodabox.com> Tue, 24 Nov 2015 13:00:00 -0400

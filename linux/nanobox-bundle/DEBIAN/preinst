@@ -1,0 +1,18 @@
+#!/bin/sh -e
+if [ "$1" = "install" -o "$1" = "upgrade" ]; then
+  # check for version
+  [ -f /etc/lsb-release ] && . /etc/lsb-release
+  if [ "$DISTRIB_RELEASE" != "14.04" -a "$DISTRIB_RELEASE" != "14.10" -a "$DISTRIB_RELEASE" != "15.04" ]; then
+    echo "Nanobox bundle is currently bundled for 14.04. Please download the
+  correct virtualbox from https://www.virtualbox.org/wiki/Linux_Downloads"
+    vbox='no'
+  fi
+
+  # remove lock in order to preserve package individual-ness
+  rm -f /var/lib/dpkg/lock
+  [ -z "$vbox" ] && (dpkg -s virtualbox-5.0 > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/virtualbox.deb) || true
+  dpkg -s vagrant        > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/vagrant.deb
+  dpkg -s nanobox        > /dev/null 2>&1 || dpkg -i /opt/nanobox/share/nanobox.deb
+  # for whatever reason, dpkg leaves nanobox-bundle half configured.
+  # everything is installed, but it needs `dpkg -i`d again.
+fi

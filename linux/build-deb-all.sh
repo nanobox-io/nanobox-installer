@@ -1,3 +1,4 @@
+#!/bin/bash -e
 mkdir -p nanobox-bundle/opt/nanobox/share
 VAGRANT_VERS="1.7.4"
 VIRTUALBOX_VERS="5.0.8"
@@ -16,7 +17,7 @@ if ! [ -a nanobox-bundle/opt/nanobox/share/vagrant.deb ]; then
 fi
 
 # gzip docs
-gzip -n --best nanobox-bundle/usr/share/doc/nanobox-bundle/changelog
+[ -f nanobox-bundle/usr/share/doc/nanobox-bundle/changelog ] && gzip -n --best nanobox-bundle/usr/share/doc/nanobox-bundle/changelog || true
 
 # proper permissions
 chmod 644 nanobox-bundle/opt/nanobox/share/virtualbox.deb
