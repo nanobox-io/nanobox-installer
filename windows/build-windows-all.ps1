@@ -45,7 +45,7 @@ $client.DownloadFile($VagrantSourceURL, $VagrantDest)
 Write-Host "Downloaded vagrant: $($VagrantVersion)"
 
 # Download virtualbox
-$VirtualBoxSourceURL = "http://download.virtualbox.org/virtualbox/5.0.8/VirtualBox-5.0.8-103449-Win.exe"
+$VirtualBoxSourceURL = "http://download.virtualbox.org/virtualbox/5.0.10/VirtualBox-5.0.10-104061-Win.exe"
 $VirtualBoxDest      = "$($NanoboxTmpDir)/virtualbox.exe"
 
 Write-Host "Downloading virtualbox: $($VirtualBoxVersion)"
