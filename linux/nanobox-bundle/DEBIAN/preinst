@@ -1,18 +1,4 @@
 #!/bin/sh -e
-if [ "$1" = "install" -o "$1" = "upgrade" ]; then
-  # check for version
-  [ -f /etc/lsb-release ] && . /etc/lsb-release
-  if [ "$DISTRIB_RELEASE" != "14.04" -a "$DISTRIB_RELEASE" != "14.10" -a "$DISTRIB_RELEASE" != "15.04" ]; then
-    echo "Nanobox bundle is currently bundled for 14.04. Please download the
-  correct virtualbox from https://www.virtualbox.org/wiki/Linux_Downloads"
-    vbox='no'
-  fi
-
-  [ -z "$vbox" ] && ( dpkg -s virtualbox-5.0 > /dev/null 2>&1 || install_virtualbox ) || true
-  dpkg -s vagrant        > /dev/null 2>&1 || install_vagrant
-  dpkg -s nanobox        > /dev/null 2>&1 || install_nanobox
-fi
-
 install_vagrant(){
   echo "Installing vagrant..."
   wget -O tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
@@ -28,5 +14,20 @@ install_virtualbox(){
 install_nanobox(){
   echo "Installing nanobox..."
   wget -O tmp/nanobox.deb https://s3.amazonaws.com/tools.nanobox.io/installers/linux/nanobox.deb
-  dpkg -i tmp/nanobox.deb
+  dpkg -i --ignore-depends=virtualbox tmp/nanobox.deb
 }
+
+if [ "$1" = "install" -o "$1" = "upgrade" ]; then
+  # check for version
+  [ -f /etc/lsb-release ] && . /etc/lsb-release
+  if [ "$DISTRIB_RELEASE" != "14.04" -a "$DISTRIB_RELEASE" != "14.10" -a "$DISTRIB_RELEASE" != "15.04" ]; then
+    echo "Nanobox bundle is currently bundled for 14.04. Please download the
+  correct virtualbox from https://www.virtualbox.org/wiki/Linux_Downloads"
+    vbox='no'
+  fi
+
+  rm -f /var/lib/dpkg/lock
+  [ -z "$vbox" ] && ( dpkg -s virtualbox-5.0 > /dev/null 2>&1 || install_virtualbox ) || true
+  dpkg -s vagrant > /dev/null 2>&1 || install_vagrant
+  dpkg -s nanobox > /dev/null 2>&1 || install_nanobox
+fi
