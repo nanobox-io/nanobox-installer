@@ -1,14 +1,25 @@
 #!/bin/bash -e
 
-# gzip docs
-[ -f nanobox-bundle/usr/share/doc/nanobox-bundle/changelog ] && gzip -n --best nanobox-bundle/usr/share/doc/nanobox-bundle/changelog || true
+# Fetch installers
+# nanobox
+cp nanobox.deb nanobox-bundle/nanobox.deb
+
+# virtualbox
+if ! [ -a nanobox-bundle/virtualbox.deb ]; then
+  wget -O nanobox-bundle/virtualbox.deb http://download.virtualbox.org/virtualbox/5.0.10/virtualbox-5.0_5.0.10-104061~Ubuntu~trusty_amd64.deb
+fi
+
+# vagrant
+if ! [ -a nanobox-bundle/vagrant.deb ]; then
+  wget -O nanobox-bundle/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+fi
 
 # proper permissions
-chmod 644 nanobox-bundle/usr/share/doc/nanobox-bundle/changelog.gz
-chmod 644 nanobox-bundle/usr/share/doc/nanobox-bundle/copyright
+chmod 644 nanobox-bundle/virtualbox.deb
+chmod 644 nanobox-bundle/vagrant.deb
 
-find nanobox-bundle -type d | xargs chmod 755
-chmod 755 nanobox-bundle/DEBIAN/p*
+chmod 755 nanobox-bundle/install
+chmod 755 nanobox-bundle/uninstall
 
 # build package
-fakeroot dpkg-deb --build nanobox-bundle
+tar -czf nanobox-bundle.tgz nanobox-bundle/.

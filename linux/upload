@@ -1,2 +1,2 @@
 #!/bin/bash
-s3cmd --acl-public put nanobox.deb nanobox-bundle.deb s3://tools.nanobox.io/installers/linux/
+s3cmd --acl-public put nanobox.deb nanobox-bundle.tgz s3://tools.nanobox.io/installers/linux/

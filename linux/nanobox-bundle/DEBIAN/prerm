@@ -1,5 +1,0 @@
-#!/bin/sh -e
-if [ "$1" = "remove" ]; then
-  # remove lock in order to preserve package individual-ness
-  dpkg -s nanobox > /dev/null 2>&1 && ( rm -f /var/lib/dpkg/lock && dpkg --purge nanobox )
-fi
