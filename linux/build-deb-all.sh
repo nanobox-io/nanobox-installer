@@ -22,4 +22,4 @@ chmod 755 nanobox-bundle/install
 chmod 755 nanobox-bundle/uninstall
 
 # build package
-tar -czf nanobox-bundle.tgz nanobox-bundle/.
+tar -czf nanobox-bundle.tgz nanobox-bundle/
