@@ -5,15 +5,4 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-# install software
-dpkg -s vagrant > /dev/null 2>&1 || dpkg -i ./vagrant.deb
-
-[ -f /etc/lsb-release ] && . /etc/lsb-release
-if [ "$DISTRIB_RELEASE" = "14.04" -o "$DISTRIB_RELEASE" = "14.10" -o "$DISTRIB_RELEASE" = "15.04" ]; then
-  dpkg -s virtualbox-5.0 > /dev/null 2>&1 || dpkg -i ./virtualbox.deb
-else
-  echo "Nanobox bundle is currently bundled for 14.04. Please download the
-correct virtualbox from https://www.virtualbox.org/wiki/Linux_Downloads"
-fi
-
-dpkg -i --ignore-depends=virtualbox ./nanobox.deb
+dpkg -r nanobox
