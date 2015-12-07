@@ -32,7 +32,7 @@ echo "Building core.pkg"
 pkgbuild \
   --root nanobox \
   --identifier com.nanobox.nanobox \
-  --version "0.16.10" \
+  --version "0.16.14" \
   --install-location "/opt/nanobox" \
   --scripts "scripts" \
   --timestamp=none \

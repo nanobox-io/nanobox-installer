@@ -1,9 +1,9 @@
 # Exit if there are any exceptions
 $ErrorActionPreference = "Stop"
 
-$NanoboxVersion    = "0.16.10"
+$NanoboxVersion    = "0.16.14"
 $VagrantVersion    = "1.7.4"
-$VirtualBoxVersion = "5.0.8"
+$VirtualBoxVersion = "5.0.10"
 
 $OutputPath = "nanobox-bundle.exe"
 
@@ -23,16 +23,9 @@ $NanoboxTmpDir = [System.IO.Path]::Combine($NanoboxTmpDir, [System.IO.Path]::Get
 [System.IO.Directory]::CreateDirectory($NanoboxTmpDir) | Out-Null
 Write-Host "nanobox temp dir: $($NanoboxTmpDir)"
 
-# Download nanobox
-$NanoboxSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/installers/windows/nanobox.msi"
+# Move nanobox
 $NanoboxDest      = "$($NanoboxTmpDir)/nanobox.msi"
-
-# Write-Host "Downloading nanobox: $($NanoboxVersion)"
-# $client = New-Object System.Net.WebClient
-# $client.DownloadFile($NanoboxSourceURL, $NanoboxDest)
-# Write-Host "Downloaded nanobox: $($NanoboxVersion)"
-
-# Write-Host "Copying nanobox: $($NanoboxVersion)"
+Write-Host "Copying nanobox: $($NanoboxVersion)"
 Copy-Item nanobox.msi $NanoboxDest
 
 # Download vagrant
@@ -45,7 +38,7 @@ $client.DownloadFile($VagrantSourceURL, $VagrantDest)
 Write-Host "Downloaded vagrant: $($VagrantVersion)"
 
 # Download virtualbox
-$VirtualBoxSourceURL = "http://download.virtualbox.org/virtualbox/5.0.8/VirtualBox-5.0.8-103449-Win.exe"
+$VirtualBoxSourceURL = "http://download.virtualbox.org/virtualbox/5.0.10/VirtualBox-5.0.10-104061-Win.exe"
 $VirtualBoxDest      = "$($NanoboxTmpDir)/virtualbox.exe"
 
 Write-Host "Downloading virtualbox: $($VirtualBoxVersion)"

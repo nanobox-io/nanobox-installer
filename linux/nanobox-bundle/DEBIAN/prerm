@@ -1,8 +1,0 @@
-#!/bin/sh -e
-if [ "$1" = "remove" ]; then
-  # remove lock in order to preserve package individual-ness
-  rm /var/lib/dpkg/lock
-  dpkg -s nanobox        > /dev/null 2>&1 && dpkg --purge nanobox
-  dpkg -s vagrant        > /dev/null 2>&1 && dpkg --purge vagrant
-  dpkg -s virtualbox-5.0 > /dev/null 2>&1 && dpkg --purge virtualbox-5.0
-fi
