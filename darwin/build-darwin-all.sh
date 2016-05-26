@@ -19,6 +19,7 @@ chmod 755 nanobox/bin/nanobox
 [ -f dmg/.DockerToolbox.pkg ] || curl -fLkso dmg/.DockerToolbox.pkg 'https://github.com/docker/toolbox/releases/download/v1.11.1b/DockerToolbox-1.11.1b.pkg'
 # uninstall tool for docker toolbox
 [ -f dmg/.dockertoolbox.uninstall.tool ] || curl -fLkso dmg/.dockertoolbox.uninstall.tool 'https://raw.githubusercontent.com/docker/toolbox/v1.11.1b/osx/uninstall.sh'
+chmod 755 dmg/.dockertoolbox.uninstall.tool
 
 # set icon for nanobox bin
 sips -i resources/nanodesk.icns
