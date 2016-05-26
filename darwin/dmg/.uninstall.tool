@@ -67,12 +67,11 @@ for file in "${my_files[@]}"; do
     fi
 done
 
-vagrant box list  | grep '^nanobox/boot2docker ' &> /dev/null
-if [[ $? -eq 0 ]]; then
-    vagrant box remove nanobox/boot2docker --force &> /dev/null
-fi
-
 echo "Successfully uninstalled nanobox."
+
+if [ ! -f /Volumes/nanobox/.dockertoolbox.uninstall.tool ]; then
+    key_exit 0
+fi
 
 # Run the uninstall.tool scripts of Docker Toolbox also (if selected)
 my_answer=''
@@ -88,6 +87,6 @@ fi
 
 my_answer=''
 
-osascript -e "do shell script \"/Volumes/nanobox/.dockertoolbox.uninstall.tool\" with administrator privileges"
+osascript -e "do shell script \"sudo /Volumes/nanobox/.dockertoolbox.uninstall.tool\" with administrator privileges"
 
 key_exit 0
