@@ -113,11 +113,11 @@ $contents = @"
     </Condition>
 
     <!-- Get the proper system directory -->
-    <SetDirectory Id="WINDOWSVOLUME" Value="[WindowsVolume]" />
+    <SetDirectory Id="PROGRAMFILES64FOLDER" Value="[ProgramFiles64Folder]" />
 
     <!-- The directory where we'll install nanobox -->
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="WINDOWSVOLUME">
+      <Directory Id="PROGRAMFILES64FOLDER">
         <Directory Id="MANUFACTURERDIR" Name="Pagoda Box">
           <Directory Id="NANOBOXAPPDIR" Name="nanobox">
             <Component Id="nanoboxBin"
