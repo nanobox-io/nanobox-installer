@@ -87,6 +87,6 @@ fi
 
 my_answer=''
 
-osascript -e "do shell script \"sudo /Volumes/nanobox/.dockertoolbox.uninstall.tool\" with administrator privileges"
+osascript -e "do shell script \"sudo bash -c 'echo yes | /Volumes/nanobox/.dockertoolbox.uninstall.tool'\" with administrator privileges"
 
 key_exit 0

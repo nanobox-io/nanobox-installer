@@ -1,10 +1,10 @@
 Package: nanobox
-Version: 0.16.15
+Version: 0.18.2
 Section: devel
 Priority: optional
 Architecture: amd64
 Installed-Size: 12288
-Depends: vagrant, virtualbox
+Depends: docker-engine (>= 1.10.0)
 Maintainer: Pagoda Box <sdomino@pagodabox.com>
 Description: Nanobox cli utility
  This tool provides a simple, quick dev environment.
