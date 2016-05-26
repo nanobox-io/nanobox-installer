@@ -74,33 +74,20 @@ fi
 
 echo "Successfully uninstalled nanobox."
 
-# Run the uninstall.tool scripts of vagrant and virtualbox also (if selected)
+# Run the uninstall.tool scripts of Docker Toolbox also (if selected)
 my_answer=''
 echo ""
-echo "Do you want to uninstall Vagrant and VirtualBox also (Yes/No)?"
+echo "Do you want to uninstall Docker Toolbox also (Yes/No)?"
 read my_answer
 if [ "$my_answer" != "Yes" ] && [ "$my_answer" != "yes" ]; then
     echo ""
     echo "Done."
-    echo "Aborting Vagrant/VirtualBox uninstall. (answer: ${my_answer})"
+    echo "Aborting Docker Toolbox uninstall. (answer: ${my_answer})"
     key_exit 0
 fi
 
 my_answer=''
-echo "Uninstalling vagrant.."
-which vagrant &> /dev/null
-if [[ $? -eq 0 ]]; then
-    hdiutil mount /Volumes/nanobox/.vagrant.dmg &> /dev/null
-    ( exec /Volumes/Vagrant/uninstall.tool )
-    hdiutil unmount /Volumes/Vagrant &> /dev/null
-fi
 
-echo "Uninstalling virtualbox.."
-which vboxmanage &> /dev/null
-if [[ $? -eq 0 ]]; then
-    hdiutil mount /Volumes/nanobox/.virtualbox.dmg &> /dev/null
-    ( exec /Volumes/VirtualBox/VirtualBox_Uninstall.tool )
-    hdiutil unmount /Volumes/VirtualBox/ &> /dev/null
-fi
+osascript -e "do shell script \"/Volumes/nanobox/.dockertoolbox.uninstall.tool\" with administrator privileges"
 
 key_exit 0

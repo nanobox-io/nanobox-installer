@@ -2,6 +2,8 @@
 darwin/dmg/.nanobox-boot2docker.box
 darwin/dmg/nanobox.pkg
 darwin/dmg/.v*
+darwin/dmg/.dockertoolbox.uninstall.tool
+darwin/dmg/.DockerToolbox.pkg
 darwin/nanobox.dmg
 darwin/nanobox/*
 linux/*.deb

@@ -15,10 +15,10 @@ mkdir -p \
 # nanobox
 curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
 chmod 755 nanobox/bin/nanobox
-# virtualbox
-[ -f dmg/.virtualbox.dmg ] || curl -fLkso dmg/.virtualbox.dmg 'http://download.virtualbox.org/virtualbox/5.0.10/VirtualBox-5.0.10-104061-OSX.dmg'
-# vagrant
-[ -f dmg/.vagrant.dmg ] || curl -fLkso dmg/.vagrant.dmg 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4.dmg'
+# docker toolbox
+[ -f dmg/.DockerToolbox.pkg ] || curl -fLkso dmg/.DockerToolbox.pkg 'https://github.com/docker/toolbox/releases/download/v1.11.1b/DockerToolbox-1.11.1b.pkg'
+# uninstall tool for docker toolbox
+[ -f dmg/.dockertoolbox.uninstall.tool ] || curl -fLkso dmg/.dockertoolbox.uninstall.tool 'https://raw.githubusercontent.com/docker/toolbox/v1.11.1b/osx/uninstall.sh'
 
 # set icon for nanobox bin
 sips -i resources/nanodesk.icns
@@ -34,7 +34,7 @@ echo "Building core.pkg"
 pkgbuild \
   --root nanobox \
   --identifier com.nanobox.nanobox \
-  --version "0.16.15" \
+  --version "0.18.2" \
   --install-location "/opt/nanobox" \
   --scripts "scripts-all" \
   --timestamp=none \

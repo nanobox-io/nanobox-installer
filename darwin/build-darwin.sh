@@ -4,9 +4,8 @@
 [ -f nanobox.dmg ] && rm -f nanobox.dmg
 [ -f dmg/nanobox.pkg ] && rm -f dmg/nanobox.pkg
 [ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
-[ -f dmg/.virtualbox.dmg ] && rm -f dmg/.virtualbox.dmg
-[ -f dmg/.vagrant.dmg ] && rm -f dmg/.vagrant.dmg
-[ -f dmg/.nanobox-boot2docker.box ] && rm -f dmg/.nanobox-boot2docker.box
+[ -f dmg/.dockertoolbox.uninstall.tool ] && rm -f dmg/.dockertoolbox.uninstall.tool
+[ -f dmg/.DockerToolbox.pkg ] && rm -f dmg/.DockerToolbox.pkg
 [ -d /Volumes/nanobox ] && hdiutil detach -force /Volumes/nanobox
 
 # prep dirs

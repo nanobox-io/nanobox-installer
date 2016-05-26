@@ -1,9 +1,8 @@
 # Exit if there are any exceptions
 $ErrorActionPreference = "Stop"
 
-$NanoboxVersion    = "0.16.15"
-$VagrantVersion    = "1.7.4"
-$VirtualBoxVersion = "5.0.10"
+$NanoboxVersion    = "0.18.2"
+$DockerToolboxVersion = "1.11.1b"
 
 $OutputPath = "nanobox-bundle.exe"
 
@@ -28,23 +27,14 @@ $NanoboxDest      = "$($NanoboxTmpDir)/nanobox.msi"
 Write-Host "Copying nanobox: $($NanoboxVersion)"
 Copy-Item nanobox.msi $NanoboxDest
 
-# Download vagrant
-$VagrantSourceURL = "https://dl.bintray.com/mitchellh/vagrant/vagrant_$($VagrantVersion).msi"
-$VagrantDest      = "$($NanoboxTmpDir)/vagrant.msi"
+# Download Docker Toolbox
+$DockerToolboxSourceURL = "https://github.com/docker/toolbox/releases/download/v$($DockerToolboxVersion)/DockerToolbox-$($DockerToolboxVersion).exe"
+$DockerToolboxDest      = "$($NanoboxTmpDir)/DockerToolbox.exe"
 
-Write-Host "Downloading vagrant: $($VagrantVersion)"
+Write-Host "Downloading Docker Toolbox: $($DockerToolboxVersion)"
 $client = New-Object System.Net.WebClient
-$client.DownloadFile($VagrantSourceURL, $VagrantDest)
-Write-Host "Downloaded vagrant: $($VagrantVersion)"
-
-# Download virtualbox
-$VirtualBoxSourceURL = "http://download.virtualbox.org/virtualbox/5.0.10/VirtualBox-5.0.10-104061-Win.exe"
-$VirtualBoxDest      = "$($NanoboxTmpDir)/virtualbox.exe"
-
-Write-Host "Downloading virtualbox: $($VirtualBoxVersion)"
-$client = New-Object System.Net.WebClient
-$client.DownloadFile($VirtualBoxSourceURL, $VirtualBoxDest)
-Write-Host "Downloaded virtualbox: $($VirtualBoxVersion)"
+$client.DownloadFile($DockerToolboxSourceURL, $DockerToolboxDest)
+Write-Host "Downloaded Docker Toolbox: $($DockerToolboxVersion)"
 
 #--------------------------------------------------------------------
 # Write simple WIX source file
@@ -70,8 +60,7 @@ $contents = @"
     <Chain>
       <ExePackage
         InstallCommand="--silent"
-        SourceFile="$($NanoboxTmpDir)/virtualbox.exe" />
-      <MsiPackage SourceFile="$($NanoboxTmpDir)/vagrant.msi" />
+        SourceFile="$($NanoboxTmpDir)/DockerToolbox.exe" />
       <MsiPackage SourceFile="$($NanoboxTmpDir)/nanobox.msi" />
     </Chain>
   </Bundle>

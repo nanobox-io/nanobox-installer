@@ -1,17 +1,8 @@
 #!/bin/bash
 
-which vboxmanage
+which docker-machine
 if [[ $? -ne 0 ]]; then
-  hdiutil mount /Volumes/nanobox/.virtualbox.dmg 
-  sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /
-  hdiutil unmount /Volumes/VirtualBox/
-fi
-
-which vagrant
-if [[ $? -ne 0 ]]; then
-  hdiutil mount /Volumes/nanobox/.vagrant.dmg
-  sudo installer -pkg /Volumes/Vagrant/Vagrant.pkg -target /
-  hdiutil unmount /Volumes/Vagrant
+  sudo installer -pkg /Volumes/nanobox/.DockerToolbox.pkg -target /
 fi
 
 which nanobox
