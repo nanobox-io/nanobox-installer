@@ -13,7 +13,11 @@ mkdir -p \
 
 # get mac bins
 # nanobox
-curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
+if [ -f beta/nanobox-darwin ]; then
+  cp beta/nanobox-darwin nanobox/bin/nanobox
+else
+  curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
+fi
 chmod 755 nanobox/bin/nanobox
 # docker toolbox
 [ -f dmg/.DockerToolbox.pkg ] || curl -fLkso dmg/.DockerToolbox.pkg 'https://github.com/docker/toolbox/releases/download/v1.11.1b/DockerToolbox-1.11.1b.pkg'
