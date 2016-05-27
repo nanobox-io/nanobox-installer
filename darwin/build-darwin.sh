@@ -15,7 +15,7 @@ mkdir -p \
 
 # get nanobox mac bins
 if [ -f beta/nanobox-darwin ]; then
-  cp beta/nanobox-darwin
+  cp beta/nanobox-darwin nanobox/bin/nanobox
 else
   curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
 fi
