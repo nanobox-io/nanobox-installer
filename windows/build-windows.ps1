@@ -28,7 +28,7 @@ $NanoboxTmpDir = [System.IO.Path]::Combine($NanoboxTmpDir, [System.IO.Path]::Get
 Write-Host "nanobox temp dir: $($NanoboxTmpDir)"
 
 
-$betaExist = Test-Path $($Dir)/beta/nanobox-windows.exe
+$betaExist = Test-Path "$($Dir)/beta/nanobox-windows.exe"
 If ($betaExist -eq $True) {
   # Copy the beta version
   Write-Host "Copying beta nanobox: $($NanoboxVersion)"
