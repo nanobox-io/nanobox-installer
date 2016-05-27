@@ -14,7 +14,11 @@ mkdir -p \
   nanobox/bin
 
 # get nanobox mac bins
-curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
+if [ -f beta/nanobox-darwin ]; then
+  cp beta/nanobox-darwin
+else
+  curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
+fi
 chmod 755 nanobox/bin/nanobox
 
 # set icon for nanobox bin

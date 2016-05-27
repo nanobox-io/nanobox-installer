@@ -1,7 +1,12 @@
 #!/bin/bash -e
 mkdir -p nanobox/opt/nanobox/bin
 
-wget -O nanobox/opt/nanobox/bin/nanobox https://s3.amazonaws.com/tools.nanobox.io/cli/linux/amd64/nanobox
+if [ -f beta/nanobox-linux ]; then
+  cp beta/nanobox-linux nanobox/opt/nanobox/bin/nanobox
+else
+  wget -O nanobox/opt/nanobox/bin/nanobox https://s3.amazonaws.com/tools.nanobox.io/cli/linux/amd64/nanobox
+fi
+
 chmod 755 nanobox/opt/nanobox/bin/nanobox
 
 # gzip docs
