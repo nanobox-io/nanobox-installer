@@ -14,11 +14,7 @@ mkdir -p \
   nanobox/bin
 
 # get nanobox mac bins
-if [ -f beta/nanobox-darwin ]; then
-  cp beta/nanobox-darwin nanobox/bin/nanobox
-else
-  curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
-fi
+curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/nanobox/v1/darwin/amd64/nanobox'
 chmod 755 nanobox/bin/nanobox
 
 # set icon for nanobox bin
@@ -35,7 +31,7 @@ echo "Building core.pkg"
 pkgbuild \
   --root nanobox \
   --identifier com.nanobox.nanobox \
-  --version "0.16.15" \
+  --version "0.18.2" \
   --install-location "/opt/nanobox" \
   --scripts "scripts" \
   --timestamp=none \

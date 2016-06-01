@@ -1,11 +1,7 @@
 #!/bin/bash -e
 mkdir -p nanobox/opt/nanobox/bin
 
-if [ -f beta/nanobox-linux ]; then
-  cp beta/nanobox-linux nanobox/opt/nanobox/bin/nanobox
-else
-  wget -O nanobox/opt/nanobox/bin/nanobox https://s3.amazonaws.com/tools.nanobox.io/cli/linux/amd64/nanobox
-fi
+wget -O nanobox/opt/nanobox/bin/nanobox https://s3.amazonaws.com/tools.nanobox.io/nanobox/v1/linux/amd64/nanobox
 
 chmod 755 nanobox/opt/nanobox/bin/nanobox
 

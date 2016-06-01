@@ -4,6 +4,8 @@
 [ -f nanobox-bundle.dmg ] && rm -f nanobox-bundle.dmg
 [ -f dmg/nanobox.pkg ] && rm -f dmg/nanobox.pkg
 [ -f nanobox/bin/nanobox ] && rm -f nanobox/bin/nanobox
+[ -f dmg/.dockertoolbox.uninstall.tool ] && rm -f dmg/.dockertoolbox.uninstall.tool
+[ -f dmg/.DockerToolbox.pkg ] && rm -f dmg/.DockerToolbox.pkg
 [ -d /Volumes/nanobox ] && hdiutil detach -force /Volumes/nanobox
 
 # prep dirs
@@ -13,11 +15,7 @@ mkdir -p \
 
 # get mac bins
 # nanobox
-if [ -f beta/nanobox-darwin ]; then
-  cp beta/nanobox-darwin nanobox/bin/nanobox
-else
-  curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/cli/darwin/amd64/nanobox'
-fi
+curl -fLkso nanobox/bin/nanobox 'https://s3.amazonaws.com/tools.nanobox.io/nanobox/v1/darwin/amd64/nanobox'
 chmod 755 nanobox/bin/nanobox
 # docker toolbox
 [ -f dmg/.DockerToolbox.pkg ] || curl -fLkso dmg/.DockerToolbox.pkg 'https://github.com/docker/toolbox/releases/download/v1.11.1b/DockerToolbox-1.11.1b.pkg'

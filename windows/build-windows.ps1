@@ -29,21 +29,14 @@ Write-Host "nanobox temp dir: $($NanoboxTmpDir)"
 
 
 $betaExist = Test-Path "$($Dir)/beta/nanobox-windows.exe"
-If ($betaExist -eq $True) {
-  # Copy the beta version
-  Write-Host "Copying beta nanobox: $($NanoboxVersion)"
-  Copy-Item "$($Dir)\beta\nanobox-windows.exe" -Destination "$($NanoboxTmpDir)/nanobox.exe"
-  Write-Host "Copyied beta nanobox: $($NanoboxVersion)"
-} Else {
-  # Download nanobox
-  $nanoboxSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/cli/windows/amd64/nanobox.exe"
-  $nanoboxDest      = "$($NanoboxTmpDir)/nanobox.exe"
+# Download nanobox
+$nanoboxSourceURL = "https://s3.amazonaws.com/tools.nanobox.io/nanobox/v1/windows/amd64/nanobox.exe"
+$nanoboxDest      = "$($NanoboxTmpDir)/nanobox.exe"
 
-  Write-Host "Downloading nanobox: $($NanoboxVersion)"
-  $client = New-Object System.Net.WebClient
-  $client.DownloadFile($nanoboxSourceURL, $nanoboxDest)
-  Write-Host "Downloaded nanobox: $($NanoboxVersion)"
-}
+Write-Host "Downloading nanobox: $($NanoboxVersion)"
+$client = New-Object System.Net.WebClient
+$client.DownloadFile($nanoboxSourceURL, $nanoboxDest)
+Write-Host "Downloaded nanobox: $($NanoboxVersion)"
 
 
 #--------------------------------------------------------------------
