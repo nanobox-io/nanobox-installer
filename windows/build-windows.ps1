@@ -136,6 +136,13 @@ $contents = @"
                 System="yes"
                 Value="[NANOBOXAPPDIR]" />
 
+              <Environment Id="VboxEnvironment"
+                Name="PATH"
+                Action="set"
+                Part="last"
+                System="yes"
+                Value="C:\Program Files\Oracle\VirtualBox" />
+
               <!-- We need this to avoid an ICE validation error -->
               <CreateFolder />
 
@@ -148,17 +155,6 @@ $contents = @"
     <!-- Add nanobox icon -->
     <Icon Id="icon.ico" SourceFile="$($InstallerTmpDir)\resources\nanodesk.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-
-    <!-- Remove nanobox-boot2docker box on uninstall -->
-    <CustomAction Id="DelBox"
-                  Directory="NANOBOXAPPDIR"
-                  ExeCommand="&quot;C:\HashiCorp\Vagrant\bin\vagrant.exe&quot; box remove --force nanobox/boot2docker"
-                  Execute="commit"
-                  Return="ignore"/>
-
-    <InstallExecuteSequence>
-      <Custom Action="DelBox" After="InstallFiles">Remove AND Not UpgradingProductCode</Custom>
-    </InstallExecuteSequence>
 
     <!-- Define the features of our install -->
     <Feature Id="nanoboxFeature"
